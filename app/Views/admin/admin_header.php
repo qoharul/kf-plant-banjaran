@@ -57,29 +57,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto"> 
-      <!-- User Dropdown Menu -->         
-      <li class="dropdown user user-menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <img src="dist/img/dummy-profile-pic.png" class="user-image" alt="User Image">
-          <span class="hidden-xs">Halo, <u><?php echo $session->get('username'); ?></u></span>
-        </a>
-        <ul class="dropdown-menu">
-          <!-- User image -->
-          <li class="user-header">
-            <img src="dist/img/dummy-profile-pic.png" class="img-circle" alt="User Image">
-
-            <p>
-              Login sebagai : <?php echo $session->get('username');  ?>
-            </p>
-          </li>              
-          <!-- Menu Footer-->
-          <li class="user-footer">
-            <div class="pull-right">
-              <a href="<?php echo base_url('') ?>/auth/logout" class="btn bg-red">Logout <i class="fa fa-sign-out"></i></a>
-            </div>
-          </li>
-        </ul>
-      </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -107,16 +84,39 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
       </li>
-      <!-- Control Sidebar -->
-      <li class="nav-item">
+      <!-- Full Screen -->
+      <!-- <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="<?php echo base_url('') ?>/#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> -->
+      <!-- Control Sidebar -->
+      <!-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="<?php echo base_url('') ?>/#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
+      </li> -->
+      <!-- User Dropdown Menu -->         
+      <li class="dropdown user user-menu">
+        <a href="#" class="nav-link" data-toggle="dropdown">
+          <img src="dist/img/dummy-profile-pic.png" class="user-image" alt="User Image">
+          <span class="hidden-xs">Halo, <u><?php echo $session->get('username'); ?></u></span>
+        </a>
+        <ul class="dropdown-menu">
+          <!-- User image -->
+          <li class="user-header">
+            <img src="dist/img/dummy-profile-pic.png" class="img-circle" alt="User Image">
+            <p>
+              Login sebagai : <?php echo $session->get('username');  ?>
+            </p>
+          </li>              
+          <!-- Menu Footer-->
+          <li class="user-footer">
+            <div class="pull-right">
+              <a href="<?php echo base_url('') ?>/auth/logout" class="btn bg-red">Logout <i class="fa fa-sign-out"></i></a>
+            </div>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>
