@@ -127,7 +127,7 @@
             <div class="col-2">
               <div class="form-group">
                 <label for="jumlah">Jumlah</label>
-                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="0" value="<?= $list_data['jumlah']; ?>">
+                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="0" min="1" max="<?=$list_data['jumlah'];?>" value="<?= $list_data['jumlah']; ?>">
               </div>
             </div>
             <!-- /.col 4 -->
