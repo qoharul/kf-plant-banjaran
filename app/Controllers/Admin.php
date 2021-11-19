@@ -20,7 +20,7 @@ class Admin extends BaseController
         $this->mobilMasuk = new M_MobilMasuk();
         $this->mobilKeluar = new M_MobilKeluar();
         $this->satuan = new M_Satuan();
-        $this->akun = new UserModel();
+        $this->pengguna = new UserModel();
     }
 
     public function index()
@@ -54,7 +54,7 @@ class Admin extends BaseController
     {
         $data['list_satuan'] = $this->satuan->findAll();
         $data['title'] = "Tambah Barang";
-        $data['activeMenu'] = "tambahBarang";
+        $data['activeMenu'] = "barang";
 
         echo view("admin/admin_header", $data);
         echo view('admin/form_barangmasuk/form_insert', $data);
@@ -108,7 +108,7 @@ class Admin extends BaseController
         'jumlah' => $this->request->getVar('jumlah')
         ]);
         session()->setFlashdata('message', 'Tambah Data Barang Berhasil');
-        return redirect()->to('/admin/form_barangmasuk');
+        return redirect()->to('/admin/tabel_barangmasuk');
     }
 
     function ubah_barang($id_transaksi)
@@ -191,7 +191,7 @@ class Admin extends BaseController
     public function tabel_barangmasuk()
     {
         $data['list_data'] = $this->barangMasuk->findAll();
-        $data['title'] = "Tabel Barang Masuk";
+        $data['title'] = "Barang";
         $data['activeMenu'] = "barang";
 
         echo view("admin/admin_header", $data);
@@ -315,7 +315,7 @@ class Admin extends BaseController
     public function form_mobilmasuk()
     {
         $data['title'] = "Tambah Mobil";
-        $data['activeMenu'] = "tambahMobil";
+        $data['activeMenu'] = "mobil";
 
         echo view("admin/admin_header", $data);
         echo view('admin/form_mobilmasuk/form_insert', $data);
@@ -376,7 +376,7 @@ class Admin extends BaseController
             'diperuntukkan' => $this->request->getVar('diperuntukkan')
         ]);
         session()->setFlashdata('message', 'Tambah Data Mobil Berhasil');
-        return redirect()->to('/admin/form_mobilmasuk');
+        return redirect()->to('/admin/tabel_mobilmasuk');
     }
 
     function ubah_mobil($id_mobil)
@@ -815,33 +815,33 @@ class Admin extends BaseController
     ####################################
 
     ####################################
-        // AKUN
+        // PENGGUNA
     ####################################
 
-    public function akun()
+    public function pengguna()
     {        
-        $data['list_akun'] = $this->akun->findAll();
+        $data['list_pengguna'] = $this->pengguna->findAll();
         $data['title'] = "Pengguna";
         $data['activeMenu'] = "pengguna";
 
         echo view("admin/admin_header", $data);
-        echo view('admin/akun', $data);
+        echo view('admin/pengguna', $data);
         echo view("admin/admin_footer");
 
         
     }
     
-    public function tambah_akun()
+    public function tambah_pengguna()
     {
-        $data['title'] = "Tambah Akun";
-        $data['activeMenu'] = "akun";
+        $data['title'] = "Tambah Pengguna";
+        $data['activeMenu'] = "pengguna";
 
         echo view("admin/admin_header", $data);
-        echo view('admin/form_akun/form_insert', $data);
+        echo view('admin/form_pengguna/form_insert', $data);
         echo view("admin/admin_footer");
     }
     
-    public function proses_tambah_akun()
+    public function proses_tambah_pengguna()
     {
         if (!$this->validate([
         'username' => [
@@ -879,31 +879,31 @@ class Admin extends BaseController
         return redirect()->back()->withInput();
         }
 
-        $this->akun->insert([
+        $this->pengguna->insert([
         'username' => $this->request->getVar('username'),
         'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
         'role' => $this->request->getVar('role')
         ]);
-        session()->setFlashdata('message', 'Tambah Akun Berhasil');
-        return redirect()->to('/admin/form_barangmasuk');
+        session()->setFlashdata('message', 'Tambah Pengguna Berhasil');
+        return redirect()->to('/admin/pengguna');
     }
 
-    function ubah_akun($id)
+    function ubah_pengguna($id)
     {
-        $dataAkun = $this->akun->find($id);
-        if (empty($dataAkun)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Akun Tidak ditemukan!');
+        $dataPengguna = $this->pengguna->find($id);
+        if (empty($dataPengguna)) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Pengguna Tidak ditemukan!');
         }
-        $data['list_data'] = $dataAkun;
-        $data['title'] = "Ubah Akun";
-        $data['activeMenu'] = "akun";
+        $data['list_data'] = $dataPengguna;
+        $data['title'] = "Ubah Pengguna";
+        $data['activeMenu'] = "pengguna";
 
         echo view("admin/admin_header", $data);
-        echo view('admin/form_akun/form_update', $data);
+        echo view('admin/form_pengguna/form_update', $data);
         echo view("admin/admin_footer");
     }
 
-    public function proses_ubah_akun($id)
+    public function proses_ubah_pengguna($id)
     {
         if (!$this->validate([
         'username' => [
@@ -941,27 +941,27 @@ class Admin extends BaseController
             return redirect()->back();
         }
 
-        $this->akun->update($id, [
+        $this->pengguna->update($id, [
             'username' => $this->request->getVar('username'),
             // 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'role' => $this->request->getVar('role')
             ]);
-        session()->setFlashdata('message', 'Ubah Akun Berhasil');
-        return redirect()->to('admin/akun');
+        session()->setFlashdata('message', 'Ubah Pengguna Berhasil');
+        return redirect()->to('admin/pengguna');
     }
 
-    function hapus_akun($id_transaksi)
+    function hapus_pengguna($id)
     {
-        $dataBarangMasuk = $this->barangMasuk->find($id_transaksi);
-        if (empty($dataBarangMasuk)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
+        $dataPengguna = $this->pengguna->find($id);
+        if (empty($dataPengguna)) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Pengguna Tidak ditemukan!');
         }
-        $this->barangMasuk->delete($id_transaksi);
-        session()->setFlashdata('message', 'Hapus Data Barang Berhasil');
-        return redirect()->to('admin/tabel_barangmasuk');
+        $this->pengguna->delete($id);
+        session()->setFlashdata('message', 'Hapus Pengguna Berhasil');
+        return redirect()->to('admin/pengguna');
     }
 
     ####################################
-        // END AKUN
+        // END PENGGUNA
     ####################################
 }
