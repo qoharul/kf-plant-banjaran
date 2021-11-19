@@ -56,6 +56,28 @@ class Pegawai extends BaseController
         echo view("pegawai/pegawai_footer");
     }  
 
+    public function minta_barang($id_transaksi)
+    {
+        $request = \Config\Services::request();
+        $uri = $request->uri->getSegment(3);
+        $where = array( 'id_transaksi' => $uri);
+
+        
+        $dataBarangMasuk = $this->barangMasuk->find($id_transaksi);
+        if (empty($dataBarangMasuk)) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
+        }
+
+        $data['list_data'] = $dataBarangMasuk;
+        $data['list_satuan'] = $this->satuan->findAll();
+        $data['title'] = "Minta Barang";
+        $data['activeMenu'] = "barang";
+
+        echo view("pegawai/pegawai_header", $data);
+        echo view('pegawai/perpindahan_barang/form_update',$data);
+        echo view("pegawai/pegawai_footer");
+    }
+
     public function tabel_barangkeluar()
     {
         $data['list_data'] = $this->barangKeluar->findAll();
