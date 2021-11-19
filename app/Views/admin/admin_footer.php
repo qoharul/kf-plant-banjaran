@@ -3,9 +3,9 @@
     </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021</strong>
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0-rc
+    <strong>Copyright &copy; KESBANGPOL JAWA BARAT</strong>
+    <div class="float-right d-none d-sm-block">
+      <b>Admin LTE 3.2.0-rc</b>
     </div>
   </footer>
 
@@ -75,6 +75,14 @@
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   })
+
+  new TomSelect("#nip",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
 
   //Date picker
   $('#date').datetimepicker({
