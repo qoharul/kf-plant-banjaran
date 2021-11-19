@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/js/tom-select.complete.min.js"></script>  
   <link rel="icon" href="<?php echo base_url('public/assets') ?>/upload/icon.png">
   <title>KESBANGPOL | <?php echo $title ?></title>
 
@@ -32,7 +34,7 @@
   <link rel="stylesheet" type="text/css" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" type="text/css" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-footer-fixed">
   <?php $session = session()?>
   <!-- 
         <h4>Selamat datang admin!</h4>
@@ -184,7 +186,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo site_url("admin/akun")?>" class="nav-link <?php if(in_array($activeMenu,['pengguna'])) echo "active"?>">
+            <a href="<?php echo site_url("admin/pengguna")?>" class="nav-link <?php if(in_array($activeMenu,['pengguna'])) echo "active"?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pengguna
