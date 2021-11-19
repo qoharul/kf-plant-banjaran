@@ -1,3 +1,7 @@
+<?php if ($list_data['jumlah']<1){
+    throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Mobil Tidak ditemukan!');
+}
+?>
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
@@ -32,6 +36,29 @@
               <!-- /.row 1 -->
               <!-- row 2 -->
               <div class="row">
+                <!-- col -->
+                <div class="col">
+                </div>
+                <!-- /.col -->
+                <div class="col">
+                  <div class="form-group">
+                    <label for="nip">NIP</label>
+                    <!-- <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP"> -->
+                    <select id="nip" onkeyup="isi_otomatis()" placeholder="Pilih NIP...">
+                      <option value="">Pilih NIP...</option>
+                      <option value="3411181003">3411181003</option>
+                      <option value="3211181004">3211181004</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- col -->
+                <div class="col">
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row 2 -->
+              <!-- row 3 -->
+              <div class="row">
                 <!-- col 2.1 -->
                 <div class="col">
                 </div>
@@ -48,9 +75,25 @@
                   <!-- /.row 2.2.1 -->
                   <!-- row 2.2.2 -->
                   <div class="row">
+                    <!-- select -->
+                    <!-- <div class="form-group">
+                      <label for="bagian">Bagian</label>
+                      <select class="custom-select" name="bagian">
+                        <option value="">----- Pilih -----</option>
+                        <option value="TU Pimpinan">TU Pimpinan</option>
+                        <option value="Sekretariat (Kepegawaian)">Sekretariat (Kepegawaian)</option>
+                        <option value="Sekretariat (Perencanaan)">Sekretariat (Perencanaan)</option>
+                        <option value="Sekretariat (Keuangan)">Sekretariat (Keuangan)</option>
+                        <option value="Sekretariat (Arsip)">Sekretariat (Arsip)</option>
+                        <option value="Bidang (Kesbak)">Bidang (Kesbak)</option>
+                        <option value="Bidang (Poldagri)">Bidang (Poldagri)</option>
+                        <option value="Bidang (Wasda)">Bidang (Wasda)</option>
+                        <option value="Bidang (Idwasbang)">Bidang (Idwasbang)</option>
+                      </select>
+                    </div> -->
                     <div class="form-group">
-                      <label for="nip">NIP</label>
-                      <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP">
+                      <label for="bagian">Bagian</label>
+                      <input type="text" class="form-control" id="bagian" name="bagian" placeholder="Masukkan Bagian">
                     </div>
                   </div>
                   <!-- /.row 2.2.2 -->
@@ -96,42 +139,6 @@
                 <div class="col">
                 </div>
                 <!-- /.col 4 -->
-              </div>
-              <!-- /.row 2 -->
-              <!-- row 3 -->
-              <div class="row">
-                <!-- col 3.1 -->
-                <div class="col">
-
-                </div>
-                <!-- /.col 3.1 -->
-                <!-- col 3.2 -->
-                <div class="col-lg-3" align="center">
-                  <div class="form-group">
-                    <!-- select -->
-                    <div class="form-group">
-                      <label for="bagian">Bagian</label>
-                      <select class="custom-select" name="bagian">
-                        <option value="">----- Pilih -----</option>
-                        <option value="TU Pimpinan">TU Pimpinan</option>
-                        <option value="Sekretariat (Kepegawaian)">Sekretariat (Kepegawaian)</option>
-                        <option value="Sekretariat (Perencanaan)">Sekretariat (Perencanaan)</option>
-                        <option value="Sekretariat (Keuangan)">Sekretariat (Keuangan)</option>
-                        <option value="Sekretariat (Arsip)">Sekretariat (Arsip)</option>
-                        <option value="Bidang (Kesbak)">Bidang (Kesbak)</option>
-                        <option value="Bidang (Poldagri)">Bidang (Poldagri)</option>
-                        <option value="Bidang (Wasda)">Bidang (Wasda)</option>
-                        <option value="Bidang (Idwasbang)">Bidang (Idwasbang)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.col 3.2 -->
-                <!-- col 3.3 -->
-                <div class="col">
-
-                </div>
-                <!-- /.col 3.3 -->
               </div>
               <!-- /.row 3 -->
               <!-- row 4 -->
