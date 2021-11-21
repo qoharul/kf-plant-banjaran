@@ -141,32 +141,11 @@
           <a href="<?php echo base_url('') ?>/" class="d-block"><?php echo $session->get('username')?></a>
         </div>
       </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Cari" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="<?php echo site_url()?>" class="nav-link <?php if(in_array($activeMenu,['dashboard'])) echo "active"?>">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Halaman Utama
-              </p>
-            </a>
-          </li>
           <li class="nav-item">
             <a href="<?php echo site_url("pegawai/tabel_barangmasuk")?>" class="nav-link <?php if(in_array($activeMenu,['barang'])) echo "active"?>">
               <i class="nav-icon fas fa-box"></i>
@@ -249,18 +228,7 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item <?php if(in_array($activeMenu,['laporanBarang', 'laporanMobil'])) {
-            echo "menu-open";
-            } ?>">
-            <a href="#" class="nav-link <?php if(in_array($activeMenu,['laporanBarang', 'laporanMobil'])) {
-            echo "active";
-            } ?>">
-              <i class="nav-icon fas fa-file"></i>
-              <p>
-                Laporan
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
+
             <ul class="nav nav-treeview">
               <li class="nav-item">
               <a href="<?php echo site_url('pegawai/tabel_barangkeluar') ?>" class="nav-link <?php if ($activeMenu == 'laporanBarang') echo "active"; ?>">

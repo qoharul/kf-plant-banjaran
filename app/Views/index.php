@@ -63,12 +63,10 @@
       <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <?php //foreach($notifikasi->getResult() as $key=>$row){?>
-            <span class="badge badge-danger navbar-badge"><?= $notifikasi->getResult(); ?></span>
+            <span class="badge badge-warning navbar-badge">15</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">Notifications</span>
-            <?php //} ?>
+            <span class="dropdown-item dropdown-header">15 Notifications</span>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
               <i class="fas fa-envelope mr-2"></i> 4 new messages
@@ -131,7 +129,7 @@
     <!-- Brand Logo -->
     <a href="<?php echo base_url('') ?>/" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">ATKMobil | Pengelola</span>
+      <span class="brand-text font-weight-light">ATKMobil</span>
     </a>
 
     <!-- Sidebar -->
@@ -164,15 +162,6 @@
               <i class="nav-icon fas fa-car"></i>
               <p>
                 Mobil
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo site_url("admin/tabel_permintaan")?>" class="nav-link <?php if(in_array($activeMenu,['permintaan'])) echo "active"?>">
-              <i class="nav-icon fas fa-tasks"></i>
-              <p>
-                Permintaan                
-                <span class="badge badge-danger right"><?= $row->id;?></span>
               </p>
             </a>
           </li>
@@ -311,3 +300,281 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+  
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>Stok Barang</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-warehouse" style="font-size:65px;"></i>
+            </div>
+            <a href="<?=base_url('admin/tabel_barangmasuk')?>" class="small-box-footer">Info Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>53</h3>
+
+              <p>Barang Keluar</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-boxes"></i>
+            </div>
+            <a href="<?=base_url('admin/tabel_barangmasuk')?>" class="small-box-footer">Info Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3>6</h3>
+
+              <p>Mobil Kosong</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-model-s"></i>
+            </div>
+            <a href="<?=base_url('admin/tabel_mobilmasuk')?>" class="small-box-footer">Info Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>0</h3>
+              
+              <p>Mobil Disewakan</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-exchange-alt"></i>
+            </div>
+            <a href="<?=base_url('admin/tabel_mobilkeluar')?>" class="small-box-footer">Info Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      <!-- row -->
+      <div class="row">
+        <div class="col">
+          <!-- BAR CHART -->
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Grafik</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  
+    <!-- /.content -->
+    </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; KESBANGPOL JAWA BARAT</strong>
+    <div class="float-right d-none d-sm-block">
+      <b>Admin LTE 3.2.0-rc</b>
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="plugins/datetimepicker/locale/id.js"></script>
+
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": false, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      "scrollX": true,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  })
+
+  //Date picker
+  $('#date').datetimepicker({
+      locale: 'id',
+      format: 'L',
+  });
+  
+  $('#tanggal_masuk').datetimepicker({
+      locale: 'id',
+      format: 'L',
+  });
+  
+  $('#tanggal_keluar').datetimepicker({
+      locale: 'id',
+      format: 'L',
+  });
+  
+  $('#tanggal_berangkat').datetimepicker({
+      locale: 'id',
+      format: 'L',
+  });
+  
+  $('#tanggal_kembali').datetimepicker({
+      locale: 'id',
+      format: 'L',
+  });
+  
+  $('#tanggal_pengembalian').datetimepicker({
+      locale: 'id',
+      format: 'L',
+  });
+
+  $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+
+    // Get context with jQuery - using jQuery's .get() method.
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = {
+      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label               : 'Digital Goods',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : [28, 48, 40, 19, 86, 27, 90]
+        },
+        {
+          label               : 'Electronics',
+          backgroundColor     : 'rgba(210, 214, 222, 1)',
+          borderColor         : 'rgba(210, 214, 222, 1)',
+          pointRadius         : false,
+          pointColor          : 'rgba(210, 214, 222, 1)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data                : [65, 59, 80, 81, 56, 55, 40]
+        },
+      ]
+    }
+    var temp0 = barChartData.datasets[0]
+    var temp1 = barChartData.datasets[1]
+    barChartData.datasets[0] = temp1
+    barChartData.datasets[1] = temp0
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    new Chart(barChartCanvas, {
+      type: 'bar',
+      data: barChartData,
+      options: barChartOptions
+    })
+
+  })
+
+  new TomSelect("#nip",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
+</script>
+
+</body>
+</html>

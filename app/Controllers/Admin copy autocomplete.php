@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\M_BarangMasuk;
 use App\Models\M_BarangKeluar;
-use App\Models\M_BarangKeluarQuery;
 use App\Models\M_MobilMasuk;
 use App\Models\M_MobilKeluar;
 use App\Models\M_Satuan;
@@ -19,12 +18,11 @@ class Admin extends BaseController
         $this->session = session();       
         $this->barangMasuk = new M_BarangMasuk();
         $this->barangKeluar = new M_BarangKeluar();
-        $this->barangKeluarQuery = new M_BarangKeluarQuery();
         $this->mobilMasuk = new M_MobilMasuk();
         $this->mobilKeluar = new M_MobilKeluar();
         $this->satuan = new M_Satuan();
         $this->pengguna = new UserModel();
-        $this->pegawai = new M_ListPegawai();        
+        $this->pegawai = new M_ListPegawai();
     }
 
     public function index()
@@ -40,8 +38,7 @@ class Admin extends BaseController
         }
         
         
-        // $data['mobilDisewa'] = $this->mobilKeluar->selectSum('tb_mobil_keluar','jumlah');
-        $data['notifikasi'] = $this->barangKeluarQuery->notifikasi()->getResult();
+        $data['mobilDisewa'] = $this->mobilKeluar->selectSum('tb_mobil_keluar','jumlah');
         $data['title'] = "Dashboard";
         $data['activeMenu'] = "dashboard";
 
@@ -49,6 +46,41 @@ class Admin extends BaseController
         echo view('admin/index', $data);
         echo view("admin/admin_footer");
     }
+
+    // public function getPegawai(){
+
+    //     $request = service('request');
+    //     $postData = $request->getPost();
+  
+    //     $response = array();
+  
+    //     // Read new token and assign in $response['token']
+    //     $response['token'] = csrf_hash();
+    //     $data = array();
+  
+    //     if(isset($postData['search'])){
+  
+    //        $search = $postData['search'];
+  
+    //         // Fetch record
+    //         // $users = new Users();
+    //        $pegawailist = $pegawai->select('nama,nip')
+    //               ->like('nip',$search)
+    //               ->orderBy('nip')
+    //               ->findAll();
+    //        foreach($pegawailist as $pl){
+    //            $data[] = array(
+    //               "value" => $pl['nama'],
+    //               "label" => $pl['nip'],
+    //            );
+    //        }
+    //     }
+  
+    //     $response['data'] = $data;
+  
+    //     return $this->response->setJSON($response);
+  
+    // }
 
 
     ####################################
@@ -195,7 +227,6 @@ class Admin extends BaseController
     
     public function tabel_barangmasuk()
     {
-        $data['notifikasi'] = $this->barangKeluarQuery->notifikasi();
         $data['list_data'] = $this->barangMasuk->findAll();
         $data['title'] = "Barang";
         $data['activeMenu'] = "barang";
@@ -207,7 +238,7 @@ class Admin extends BaseController
 
     public function tabel_barangkeluar()
     {
-        $data['list_data'] = $this->barangKeluar->get();
+        $data['list_data'] = $this->barangKeluar->findAll();
         $data['title'] = "Tabel Barang Keluar";
         $data['activeMenu'] = "laporanBarang";
 
@@ -306,52 +337,6 @@ class Admin extends BaseController
             ]);
         session()->setFlashdata('message', 'Mengeluarkan Data Barang Berhasil!');
         return redirect()->to('admin/tabel_barangkeluar');
-    }
-    
-    public function permintaan_barang($id)
-    {        
-        $where = array( 'id' => $id);        
-        
-        $dataBarangKeluar = $this->barangKeluar->find($id);
-        if (empty($dataBarangKeluar)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
-        }
-
-        $data['list_data'] = $dataBarangKeluar;
-        $data['title'] = "Permintaan Barang";
-        $data['activeMenu'] = "barangKeluar";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/permintaan_barang/form_update',$data);
-        echo view("admin/admin_footer");
-    }
-
-    public function proses_permintaan_barang($id)
-    {
-        if (!$this->validate([
-            'status' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus diisi'
-                ]
-            ],
-            // 'jumlah' => [
-            //     'errors' => [
-            //         'required' => '{field} harus diisi'
-            //     ]
-            // ],
-            ])) {
-                session()->setFlashdata('error', $this->validator->listErrors());
-                return redirect()->back();
-            }
-
-            // $jumlah = $this->request->getVar('jumlah');
-    
-            $this->barangKeluar->update($id, [
-                'status' => $this->request->getVar('status')
-            ]);
-            session()->setFlashdata('message', 'Permintaan Barang Telah Disetujui');
-            return redirect()->to('admin/tabel_barangkeluar');
     }
   
 
@@ -538,11 +523,39 @@ class Admin extends BaseController
 
     public function mobil_keluar($id_mobil)
     {
+
+  
+  
+
         $request = \Config\Services::request();
         $uri = $request->uri->getSegment(3);
         $where = array( 'id_mobil' => $uri);
+        $postData = $request->getPost();
+        $response = array();
+        // $response['token'] = csrf_hash();
+        $data = array();
 
+        // Read new token and assign in $response['token']
+        if(isset($postData['search'])){
+            $search = $postData['search'];
+            // Fetch record
+            // $users = new Users();
+            $userlist = $pegawai->select('nama,nip')
+                    ->like('nip',$search)
+                    ->orderBy('nip')
+                    ->findAll(5);
+            foreach($userlist as $user){
+                $data[] = array(
+                    "value" => $user['nama'],
+                    "label" => $user['nip'],
+                );
+            }
+        }
         
+        $response['data'] = $data;
+
+        // return $this->response->setJSON($response);
+
         $dataMobilMasuk = $this->mobilMasuk->find($id_mobil);
         if (empty($dataMobilMasuk)) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Mobil Tidak ditemukan!');
@@ -710,7 +723,7 @@ class Admin extends BaseController
             $this->mobilKeluar->update($id, [
                 'tanggal_dikembalikan' => $this->request->getVar('tanggal_pengembalian'),
                 'status_pinjaman' => "Selesai",
-                'jumlah' => 1
+                'jumlah' => 0
             ]);
             session()->setFlashdata('message', 'Pengembalian Mobil Telah Berhasil');
             return redirect()->to('admin/tabel_mobilkeluar');
@@ -731,42 +744,6 @@ class Admin extends BaseController
 
     ####################################
         // END DATA MOBIL MASUK
-    ####################################
-
-
-    ####################################
-            // DATA PERMINTAAN
-    ####################################
-
-    public function tabel_permintaan()
-    {
-        // $data['list_barang'] = $this->barangKeluar->get_where();
-
-        $data['list_barang'] = $this->barangKeluarQuery->get_where();
-        // $data['list_mobil'] = $this->mobilKeluar->findAll();
-        $data['notifikasi'] = $this->barangKeluarQuery->notifikasi();
-        $data['title'] = "Konfirmasi Pengajuan";
-        $data['activeMenu'] = "permintaan";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/tabel/tabel_permintaan', $data);
-        echo view("admin/admin_footer");
-
-		// $list_barang = $this->barangKeluar->get_where();
-		// foreach($list_barang->getResult() as $key=>$row)
-		// {
-		// 	echo ($key+1).'. '; 
-		// 	echo $row->kode_barang;
-		// 	echo ' - ';
-		// 	echo $row->nama_barang;
-		// 	echo '<br>';
-		// }
-
-    }  
-
-
-    ####################################
-        // END DATA PERMINTAAN
     ####################################
 
 
@@ -935,12 +912,11 @@ class Admin extends BaseController
     {
         if (!$this->validate([
         'username' => [
-            'rules' => 'required|min_length[4]|max_length[30]|is_unique[user.username,id,{id}]',
+            'rules' => 'required|min_length[4]|max_length[30]',
             'errors' => [
                 'required' => '{field} harus diisi',
                 'min_length' => 'Nilai yang diberikan ({value}) untuk {field} harus memiliki minimal {param} karakter!',
-                'max_length' => '{field} tidak boleh melebihi {param} karakter.',
-                'is_unique' => '{field} untuk {value} sudah ada, silahkan coba lagi.'
+                'max_length' => '{field} tidak boleh melebihi {param} karakter.'
             ]
         ],
         'password' => [
@@ -968,20 +944,11 @@ class Admin extends BaseController
         ])) {
         session()->setFlashdata('error', $this->validator->listErrors());
         return redirect()->back()->withInput();
-        }        
-        
-        $data = $this->request->getPost();
-        
-        //buat salt
-        $salt = uniqid('', true);
-        
-        //hash password digabung dengan salt
-        $password = md5($data['password']).$salt;
+        }
 
         $this->pengguna->insert([
         'username' => $this->request->getVar('username'),
-        'password' => $password,
-        'salt' => $salt,
+        'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
         'role' => $this->request->getVar('role')
         ]);
         session()->setFlashdata('message', 'Tambah Pengguna Berhasil');

@@ -76,14 +76,6 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   })
 
-  new TomSelect("#nip",{
-        create: false,
-        sortField: {
-            field: "text",
-            direction: "asc"
-        }
-    });
-
   //Date picker
   $('#date').datetimepicker({
       locale: 'id',
@@ -172,6 +164,14 @@
     })
 
   })
+
+  new TomSelect("#tomSelect",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
 </script>
 
 </body>

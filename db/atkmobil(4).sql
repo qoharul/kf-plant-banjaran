@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2021 at 08:38 PM
+-- Generation Time: Nov 20, 2021 at 06:58 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -59,34 +59,37 @@ CREATE TABLE `tb_barang_keluar` (
   `kode_barang` varchar(100) NOT NULL,
   `nama_barang` varchar(100) NOT NULL,
   `satuan` varchar(50) NOT NULL,
-  `jumlah` varchar(10) NOT NULL
+  `jumlah` varchar(10) NOT NULL,
+  `status` varchar(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_barang_keluar`
 --
 
-INSERT INTO `tb_barang_keluar` (`id`, `id_transaksi`, `tanggal_masuk`, `tanggal_keluar`, `bagian`, `kode_barang`, `nama_barang`, `satuan`, `jumlah`) VALUES
-(000029, '07-08-2021.8973', '07/08/2021', '07/08/2021', 'Sekretariat (Keuangan)', '243177628530', 'Kertas', 'Rim', '12'),
-(000030, '07-08-2021.0712', '07/08/2021', '07/08/2021', 'TU Pimpinan', '718045366342', 'Tinta Epson L 120 664 Black', 'Buah', '2'),
-(000031, '07-08-2021.8973', '07/08/2021', '07/08/2021', 'Bidang (Poldagri)', '243177628530', 'Kertas', 'Rim', '8'),
-(000032, '16-08-2021.8473', '16/08/2021', '16/08/2021', 'Sekretariat (Keuangan)', '238681470362', 'Tip X', 'Buah', '20'),
-(000033, '16-08-2021.0312', '16/08/2021', '16/08/2021', 'Sekretariat (Keuangan)', '362678003591', 'Kertas F4', 'Rim', '3'),
-(000034, '07-08-2021.0712', '07/08/2021', '24/08/2021', 'Bidang (Wasda)', '718045366342', 'Tinta Epson L 120 664 Black', 'Buah', '8'),
-(000035, '24-08-2021.0649', '24/08/2021', '24/08/2021', 'Bidang (Wasda)', '251749653388', 'Ballpoint Biasa V-5 Hitam', 'Pack', '1'),
-(000036, '24-08-2021.5846', '24/08/2021', '27/08/2021', 'Bidang (Kesbak)', '439068370115', 'Kertas F4', 'Rim', '1'),
-(000037, '', '', '02-11-2021', 'Bidang (Poldagri)', '48127593713', 'Bolpoin', 'Dus', '1'),
-(000038, '', '01/11/2021', '02-11-2021', 'TU Pimpinan', '5123213123', 'Kertas A4', 'Rim', '1'),
-(000039, '', '01/11/2021', '02-11-2021', 'Bidang (Poldagri)', '48127593713', 'Bolpoin', 'Dus', '25'),
-(000040, '', '01/11/2021', '02-11-2021', 'Bidang (Idwasbang)', '48127593713', 'Bolpoin', 'Dus', '10'),
-(000041, '', '01/11/2021', '02-11-2021', 'Bidang (Idwasbang)', '48127593713', 'Bolpoin', 'Dus', '5'),
-(000042, '000009', '01/11/2021', '08-11-2021', 'Bidang (Poldagri)', '5123213123', 'Kertas A4', 'Rim', '1'),
-(000043, '000010', '01/11/2021', '09-11-2021', 'Bidang (Wasda)', '48127593713', 'Bolpoin', 'Dus', '2'),
-(000044, '000010', '01/11/2021', '09-11-2021', 'Bidang (Idwasbang)', '48127593713', 'Printer', 'Dus', '8'),
-(000045, '000010', '01/11/2021', '09-11-2021', 'Sekretariat (Keuangan)', '48127593713', 'Bolpoin', 'Dus', '1'),
-(000046, '000003', '', '', 'TU Pimpinan', '', '', '', '1'),
-(000047, '000009', '01/11/2021', '18/11/2021', 'Bidang (Kesbak)', '5123213123', 'Kertas A4', 'Rim', '3'),
-(000048, '000013', '18/11/2021', '18/11/2021', 'Bidang (Wasda)', '515125', 'Kertas A4', 'Rim', '301');
+INSERT INTO `tb_barang_keluar` (`id`, `id_transaksi`, `tanggal_masuk`, `tanggal_keluar`, `bagian`, `kode_barang`, `nama_barang`, `satuan`, `jumlah`, `status`) VALUES
+(000029, '07-08-2021.8973', '07/08/2021', '07/08/2021', 'Sekretariat (Keuangan)', '243177628530', 'Kertas', 'Rim', '12', 'Disetujui'),
+(000030, '07-08-2021.0712', '07/08/2021', '07/08/2021', 'TU Pimpinan', '718045366342', 'Tinta Epson L 120 664 Black', 'Buah', '2', 'Disetujui'),
+(000031, '07-08-2021.8973', '07/08/2021', '07/08/2021', 'Bidang (Poldagri)', '243177628530', 'Kertas', 'Rim', '8', 'Disetujui'),
+(000032, '16-08-2021.8473', '16/08/2021', '16/08/2021', 'Sekretariat (Keuangan)', '238681470362', 'Tip X', 'Buah', '20', 'Disetujui'),
+(000033, '16-08-2021.0312', '16/08/2021', '16/08/2021', 'Sekretariat (Keuangan)', '362678003591', 'Kertas F4', 'Rim', '3', 'Disetujui'),
+(000034, '07-08-2021.0712', '07/08/2021', '24/08/2021', 'Bidang (Wasda)', '718045366342', 'Tinta Epson L 120 664 Black', 'Buah', '8', 'Disetujui'),
+(000035, '24-08-2021.0649', '24/08/2021', '24/08/2021', 'Bidang (Wasda)', '251749653388', 'Ballpoint Biasa V-5 Hitam', 'Pack', '1', 'Disetujui'),
+(000036, '24-08-2021.5846', '24/08/2021', '27/08/2021', 'Bidang (Kesbak)', '439068370115', 'Kertas F4', 'Rim', '1', 'Disetujui'),
+(000037, '', '', '02-11-2021', 'Bidang (Poldagri)', '48127593713', 'Bolpoin', 'Dus', '1', 'Disetujui'),
+(000038, '', '01/11/2021', '02-11-2021', 'TU Pimpinan', '5123213123', 'Kertas A4', 'Rim', '1', 'Disetujui'),
+(000039, '', '01/11/2021', '02-11-2021', 'Bidang (Poldagri)', '48127593713', 'Bolpoin', 'Dus', '25', 'Disetujui'),
+(000040, '', '01/11/2021', '02-11-2021', 'Bidang (Idwasbang)', '48127593713', 'Bolpoin', 'Dus', '10', 'Disetujui'),
+(000041, '', '01/11/2021', '02-11-2021', 'Bidang (Idwasbang)', '48127593713', 'Bolpoin', 'Dus', '5', 'Disetujui'),
+(000042, '000009', '01/11/2021', '08-11-2021', 'Bidang (Poldagri)', '5123213123', 'Kertas A4', 'Rim', '1', 'Disetujui'),
+(000043, '000010', '01/11/2021', '09-11-2021', 'Bidang (Wasda)', '48127593713', 'Bolpoin', 'Dus', '2', 'Disetujui'),
+(000044, '000010', '01/11/2021', '09-11-2021', 'Bidang (Idwasbang)', '48127593713', 'Printer', 'Dus', '8', 'Disetujui'),
+(000045, '000010', '01/11/2021', '09-11-2021', 'Sekretariat (Keuangan)', '48127593713', 'Bolpoin', 'Dus', '1', 'Disetujui'),
+(000046, '000003', '', '', 'TU Pimpinan', '', '', '', '1', 'Disetujui'),
+(000047, '000009', '01/11/2021', '18/11/2021', 'Bidang (Kesbak)', '5123213123', 'Kertas A4', 'Rim', '3', 'Disetujui'),
+(000048, '000013', '18/11/2021', '18/11/2021', 'Bidang (Wasda)', '515125', 'Kertas A4', 'Rim', '301', 'Disetujui'),
+(000049, '000010', '01/11/2021', '20/11/2021', 'Bidang (Wasda)', '48127593713', 'Bolpoin', 'Dus', '1', 'Disetujui'),
+(000050, '000010', '01/11/2021', '20/11/2021', 'Bidang (Idwasbang)', '48127593713', 'Bolpoin', 'Dus', '33', 'Disetujui');
 
 --
 -- Triggers `tb_barang_keluar`
@@ -121,7 +124,7 @@ CREATE TABLE `tb_barang_masuk` (
 --
 
 INSERT INTO `tb_barang_masuk` (`id_transaksi`, `tanggal`, `kode_barang`, `nama_barang`, `satuan`, `jumlah`) VALUES
-(000010, '01/11/2021', '48127593713', 'Bolpoin', 'Dus', '129'),
+(000010, '01/11/2021', '48127593713', 'Bolpoin', 'Dus', '95'),
 (000011, '16/11/2021', '48127591231', 'Kertas F4', 'Rim', '12'),
 (000013, '18/11/2021', '515125', 'Kertas A4', 'Rim', '321');
 
@@ -1249,7 +1252,27 @@ INSERT INTO `tb_pegawai` (`id_pegawai`, `nip`, `nama`, `bagian`, `pangkat`, `jab
 (00000000997, '196128802857665750', 'Diana Ayu Halimah', 'Sekretariat (Perencanaan)', 'III/c', 'Penata Tk.I', 'Ki. Sampangan No. 612, Palu 71604, Sultra', '(+62) 696 6668 349'),
 (00000000998, '197009727001943132', 'Arsipatra Putra', 'Sekretariat (Keuangan)', 'III/c', 'Penata Tk.I', 'Dk. Lada No. 942, Payakumbuh 59475, Kaltim', '(+62) 477 7730 861'),
 (00000000999, '197381263912082809', 'Olivia Nova Puspita', 'Sekretariat (Keuangan)', 'III/d', 'Penata Tk.I', 'Ki. Sam Ratulangi No. 738, Solok 56341, Jateng', '(+62) 717 0193 4914'),
-(00000001000, '197294733090158424', 'Karya Prabowo', 'Sekretariat (Perencanaan)', 'III/c', 'Penata Tk.I', 'Ki. Radio No. 187, Sungai Penuh 11471, Jambi', '0488 9769 8139');
+(00000001000, '197294733090158424', 'Karya Prabowo', 'Sekretariat (Perencanaan)', 'III/c', 'Penata Tk.I', 'Ki. Radio No. 187, Sungai Penuh 11471, Jambi', '0488 9769 8139'),
+(00000001001, '196479472116605264', 'Raisa Nadia Palastri M.M.', 'Bidang (Poldagri)', 'III/d', 'Penata Tk.I', 'Psr. Agus Salim No. 767, Ambon 95226, Lampung', '0590 3767 2674'),
+(00000001002, '196632177163390662', 'Hasta Hidayanto', 'Sekretariat (Keuangan)', 'III/c', 'Penata Tk.I', 'Gg. Villa No. 424, Tarakan 34077, Jabar', '(+62) 25 5435 1271'),
+(00000001003, '198957811241219118', 'Hamima Palastri', 'Bidang (Idwasbang)', 'III/d', 'Penata Tk.I', 'Ki. Sadang Serang No. 298, Medan 64134, Gorontalo', '0872 1581 344'),
+(00000001004, '198712252771069504', 'Wakiman Tarihoran', 'Bidang (Kesbak)', 'III/c', 'Penata Tk.I', 'Kpg. Radio No. 104, Gorontalo 55514, DKI', '(+62) 780 9889 600'),
+(00000001005, '197850797839840754', 'Cakrabuana Budiman', 'Bidang (Poldagri)', 'III/c', 'Penata Tk.I', 'Kpg. Ronggowarsito No. 511, Sabang 94602, Papua', '(+62) 838 7130 1251'),
+(00000001006, '197985013796990091', 'Okto Simanjuntak', 'Bidang (Idwasbang)', 'III/d', 'Penata Tk.I', 'Jln. Ters. Kiaracondong No. 96, Cimahi 15425, Kalteng', '(+62) 22 7104 835'),
+(00000001007, '199682465120807028', 'Gantar Lazuardi', 'Bidang (Idwasbang)', 'III/d', 'Penata Tk.I', 'Gg. Gajah No. 52, Bau-Bau 27899, Kaltara', '(+62) 272 3169 6766'),
+(00000001008, '198196931918356610', 'Diana Uchita Hastuti', 'Bidang (Kesbak)', 'III/d', 'Penata Tk.I', 'Gg. Daan No. 423, Lhokseumawe 31681, Sulsel', '(+62) 965 3227 282'),
+(00000001009, '198449854992395916', 'Halima Betania Suryatmi', 'Bidang (Poldagri)', 'III/c', 'Penata Tk.I', 'Kpg. Bacang No. 188, Gorontalo 49111, Sumut', '(+62) 975 1502 3930'),
+(00000001010, '197992557369125846', 'Fathonah Malika Susanti S.E.I', 'Sekretariat (Arsip)', 'III/d', 'Penata Tk.I', 'Jln. Bagas Pati No. 547, Pariaman 55816, Sumut', '0486 2004 0279'),
+(00000001011, '198463287204385343', 'Gamani Dongoran S.I.Kom', 'Bidang (Poldagri)', 'III/d', 'Penata Tk.I', 'Ds. Cokroaminoto No. 544, Palangka Raya 31809, Kaltara', '0241 8638 9349'),
+(00000001012, '195975042907592814', 'Malika Gasti Nasyidah', 'Bidang (Wasda)', 'III/d', 'Penata Tk.I', 'Kpg. Panjaitan No. 394, Serang 90979, Sumsel', '(+62) 803 480 681'),
+(00000001013, '198758497772505606', 'Tasdik Luthfi Zulkarnain S.Pd', 'Sekretariat (Kepegawaian)', 'III/c', 'Penata Tk.I', 'Gg. Jakarta No. 11, Bima 69193, Sumut', '(+62) 569 3373 2711'),
+(00000001014, '198025276476887230', 'Lanjar Emas Rajasa S.Kom', 'Bidang (Poldagri)', 'III/d', 'Penata Tk.I', 'Ds. Basuki No. 476, Pontianak 20546, Jambi', '0270 9493 926'),
+(00000001015, '195485723379713565', 'Rafid Winarno S.I.Kom', 'Bidang (Wasda)', 'III/d', 'Penata Tk.I', 'Ds. PHH. Mustofa No. 136, Makassar 39158, Riau', '(+62) 738 4838 3829'),
+(00000001016, '199323482224202355', 'Cici Haryanti', 'Sekretariat (Kepegawaian)', 'III/d', 'Penata Tk.I', 'Ki. Bayam No. 315, Balikpapan 99938, Kalteng', '(+62) 971 8085 360'),
+(00000001017, '198817942919802204', 'Saiful Anggriawan S.E.', 'Sekretariat (Kepegawaian)', 'III/c', 'Penata Tk.I', 'Jln. Baladewa No. 932, Banda Aceh 36405, Sumut', '(+62) 720 9744 612'),
+(00000001018, '199100105949953279', 'Zulfa Patricia Mulyani', 'Sekretariat (Arsip)', 'III/d', 'Penata Tk.I', 'Ds. Bahagia No. 305, Kotamobagu 58714, Sumut', '0359 9863 719'),
+(00000001019, '198058300287903392', 'Rahmi Yuniar', 'Bidang (Poldagri)', 'III/d', 'Penata Tk.I', 'Psr. Labu No. 360, Gunungsitoli 94265, Sulbar', '(+62) 276 3353 950'),
+(00000001020, '195534307468328980', 'Ulva Wahyuni', 'Sekretariat (Keuangan)', 'III/d', 'Penata Tk.I', 'Jln. Jagakarsa No. 89, Balikpapan 20212, Sulut', '(+62) 825 4523 559');
 
 -- --------------------------------------------------------
 
@@ -1285,18 +1308,45 @@ CREATE TABLE `user` (
   `username` varchar(30) DEFAULT NULL,
   `password` varchar(200) DEFAULT NULL,
   `salt` varchar(300) DEFAULT NULL,
-  `role` int(2) DEFAULT NULL
+  `role` int(2) DEFAULT NULL,
+  `nip` varchar(22) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `bagian` varchar(100) NOT NULL,
+  `pangkat` varchar(100) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `telp` varchar(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `salt`, `role`) VALUES
-(002, 'admin2', '0192023a7bbd73250516f069df18b5006166ed4f655484.81990142', '6166ed4f655484.81990142', 1),
-(003, 'user', 'b5b73fae0d87d8b4e2573105f8fbe7bc6166f1269e9690.07496509', '6166f1269e9690.07496509', 2),
-(004, 'cobadaftar', 'bc1a8457f95e10d05dc4d9e273b7a154617211bcbbd137.82521114', '617211bcbbd137.82521114', 1),
-(005, 'admintest', '$2y$10$mIrHnkOrXyeHM.HsFywZROYrW9tAG.s9jFz2byCajTBkthtyZAMy6', NULL, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `salt`, `role`, `nip`, `nama`, `bagian`, `pangkat`, `jabatan`, `alamat`, `telp`) VALUES
+(001, 'pengelola', '3c7913bc17671596a43dcb4581992bdf619917b79ed106.89382150', '619917b79ed106.89382150', 1, '197494939920237105', 'Rizki Damanik', 'Bidang (Idwasbang)', 'IV/b', 'Pembina Tk.I', 'Jr. Imam No. 778, Tomohon 10326, DKI', '0601 4265 330'),
+(002, 'pegawai', '047aeeb234644b9e2d4138ed3bc7976a619917c6a1ced9.49952914', '619917c6a1ced9.49952914', 2, '197446818421738864', 'Kasiyah Lestari', 'Bidang (Idwasbang)', 'IV/a', 'Pembina Tk.I', 'Psr. Agus Salim No. 522, Tasikmalaya 91803, DIY', '(+62) 647 8321 0414'),
+(006, 'nurdiyanti.rangga', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 1, '199038001710042179', 'Farah Laksmiwati', 'Sekretariat (Keuangan)', 'III/d', 'Penata Tk.I', 'Jln. Dahlia No. 14, Subulussalam 85092, Babel', '0550 9189 3009'),
+(007, 'palastri.zulaikha', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 2, '195042200782085407', 'Zelda Azalea Fujiati S.Pt', 'Bidang (Wasda)', 'III/d', 'Penata Tk.I', 'Dk. Umalas No. 204, Sibolga 87795, NTB', '(+62) 453 5074 1762'),
+(008, 'prasetya.anastasia', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 2, '198729956309864962', 'Embuh Hidayat S.Farm', 'Sekretariat (Arsip)', 'III/d', 'Penata Tk.I', 'Ds. Wahid No. 395, Depok 28222, Sulut', '(+62) 262 8679 9615'),
+(010, 'jabal85', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 1, '195697258858939805', 'Hasta Sihombing', 'Bidang (Wasda)', 'III/d', 'Penata Tk.I', 'Ds. PHH. Mustofa No. 653, Tidore Kepulauan 27942, Bali', '(+62) 212 9210 587'),
+(013, 'chutapea', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 1, '198249496393356681', 'Pia Purwanti', 'Bidang (Kesbak)', 'IV/a', 'Pembina Tk.I', 'Psr. Antapani Lama No. 450, Solok 24425, Sumut', '0672 1569 042'),
+(016, 'rina.pertiwi', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 1, '195066242621031795', 'Hartana Uwais S.H.', 'Sekretariat (Arsip)', 'III/d', 'Penata Tk.I', 'Ki. Umalas No. 623, Blitar 38502, Kaltara', '0311 6914 6527'),
+(017, 'siregar.okto', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 2, '196675088319754521', 'Limar Ega Kusumo', 'Bidang (Poldagri)', 'III/d', 'Penata Tk.I', 'Jr. BKR No. 257, Langsa 13682, Riau', '0755 4620 8866'),
+(020, 'safitri.ozy', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 1, '198750455054626740', 'Tirta Tamba', 'Bidang (Poldagri)', 'III/d', 'Penata Tk.I', 'Jr. Juanda No. 413, Sungai Penuh 10142, Lampung', '0811 2377 7527'),
+(024, 'elma49', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 1, '199283901000362394', 'Kenes Habibi', 'Bidang (Poldagri)', 'III/c', 'Penata Tk.I', 'Kpg. Yogyakarta No. 784, Pekanbaru 46393, Sulbar', '(+62) 564 1156 9445'),
+(025, 'margana06', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 2, '199616069539710660', 'Lidya Yuliarti S.I.Kom', 'Bidang (Idwasbang)', 'III/d', 'Penata Tk.I', 'Jr. Sutoyo No. 249, Sungai Penuh 48516, DIY', '0937 2496 135'),
+(026, 'pnashiruddin', '827ccb0eea8a706c4c34a16891f84e7b619917d7650567.87460747', '619917d7650567.87460747', 1, '197872247369256121', 'Cakrawala Adriansyah', 'Bidang (Poldagri)', 'IV/b', 'Pembina Tk.I', 'Jln. Suharso No. 906, Pangkal Pinang 93064, Lampung', '(+62) 335 3064 485'),
+(032, 'rahimah.yuliana', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 2, '195193079756764055', 'Makuta Jumadi Jailani', 'Sekretariat (Keuangan)', 'IV/a', 'Pembina Tk.I', 'Ds. Honggowongso No. 262, Denpasar 43580, Sumbar', '0851 3884 194'),
+(033, 'galang.kurniawan', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 2, '195078451851136757', 'Dalima Nurdiyanti', 'Sekretariat (Arsip)', 'IV/b', 'Pembina Tk.I', 'Dk. Pacuan Kuda No. 388, Cilegon 13350, Malut', '0616 9939 3661'),
+(035, 'wijayanti.nurul', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 1, '196388327303590339', 'Elisa Usada', 'Bidang (Kesbak)', 'III/d', 'Penata Tk.I', 'Ki. Bakaru No. 562, Bengkulu 72751, Sumut', '0690 7102 055'),
+(036, 'xlestari', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 1, '196613321702981823', 'Tomi Hutagalung S.Pd', 'Bidang (Wasda)', 'IV/a', 'Pembina Tk.I', 'Ki. Ketandan No. 337, Tegal 23418, DKI', '0554 2188 030'),
+(039, 'kartika.prabowo', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 2, '198523896012031450', 'Jamalia Vicky Aryani', 'Sekretariat (Perencanaan)', 'III/c', 'Penata Tk.I', 'Ki. Monginsidi No. 96, Solok 17027, Sulut', '(+62) 911 2281 407'),
+(040, 'enteng.adriansyah', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 1, '198592296673307924', 'Oskar Marbun', 'Bidang (Wasda)', 'IV/b', 'Pembina Tk.I', 'Jr. Nakula No. 834, Mataram 93317, Kepri', '0668 5453 9166'),
+(041, 'lala.mulyani', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 2, '198387020473264502', 'Agus Anggriawan', 'Sekretariat (Kepegawaian)', 'IV/a', 'Pembina Tk.I', 'Ds. Bakau Griya Utama No. 604, Tarakan 18022, NTB', '(+62) 441 6505 340'),
+(044, 'haryanti.hadi', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 1, '199740863261404992', 'Emil Saefullah', 'Sekretariat (Perencanaan)', 'III/d', 'Penata Tk.I', 'Gg. Sutarto No. 148, Subulussalam 99933, Kepri', '0357 5216 4904'),
+(045, 'ehalim', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 1, '195141427579912862', 'Virman Nainggolan', 'Bidang (Kesbak)', 'III/d', 'Penata Tk.I', 'Jln. Laswi No. 686, Pekalongan 93317, Kaltim', '0953 6926 864'),
+(049, 'saragih.harjasa', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 2, '198864242424248475', 'Paris Zahra Puspita', 'Sekretariat (Arsip)', 'III/c', 'Penata Tk.I', 'Jr. Bakit  No. 618, Pasuruan 79666, Jatim', '0940 7002 8041'),
+(050, 'agnes05', '827ccb0eea8a706c4c34a16891f84e7b6199183596d936.64236627', '6199183596d936.64236627', 1, '199616765763854840', 'Ratih Mulyani S.Psi', 'Sekretariat (Keuangan)', 'III/c', 'Penata Tk.I', 'Jr. Flora No. 604, Tasikmalaya 73262, Sumut', '0288 1582 995');
 
 --
 -- Indexes for dumped tables
@@ -1364,7 +1414,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `tb_barang_keluar`
 --
 ALTER TABLE `tb_barang_keluar`
-  MODIFY `id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tb_barang_masuk`
@@ -1388,7 +1438,7 @@ ALTER TABLE `tb_mobil_masuk`
 -- AUTO_INCREMENT for table `tb_pegawai`
 --
 ALTER TABLE `tb_pegawai`
-  MODIFY `id_pegawai` int(11) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
+  MODIFY `id_pegawai` int(11) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1021;
 
 --
 -- AUTO_INCREMENT for table `tb_satuan`
@@ -1400,7 +1450,7 @@ ALTER TABLE `tb_satuan`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

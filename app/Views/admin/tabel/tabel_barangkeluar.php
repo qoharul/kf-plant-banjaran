@@ -24,30 +24,42 @@
                   <th>Nama Barang</th>
                   <th>Satuan</th>
                   <th>Jumlah</th>
+                  <th>Status Permintaan</th>
                   <th>Invoice</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <?php if(is_array($list_data)){ ?>
-                  <?php $no = 1;?>
-                  <?php foreach($list_data as $dd): ?>
-                    <td><?=$no?></td>
-                    <td><?=$dd['id_transaksi']?></td>
-                    <td><?=$dd['tanggal_masuk']?></td>
-                    <td><?=$dd['tanggal_keluar']?></td>
-                    <td><?=$dd['bagian']?></td>
-                    <td><?=$dd['kode_barang']?></td>
-                    <td><?=$dd['nama_barang']?></td>
-                    <td><?=$dd['satuan']?></td>
-                    <td><?=$dd['jumlah']?></td>
-                    <td><a type="button" class="btn btn-danger btn-report"  href="<?=base_url('report/barangKeluar/'.$dd['id'].'/'.$dd['tanggal_keluar'])?>" name="btn_report" style="margin:auto;"><i class="fas fa-file-alt" aria-hidden="true"></i></a></td>
+              <tr>
+                  <?php foreach($list_data->getResult() as $key=>$row)
+                  {?>
+                    <td><?= ($key+1);?></td>
+                    <td><?= $row->id;?></td>
+                    <td><?= $row->tanggal_masuk;?></td>
+                    <td><?= $row->tanggal_keluar;?></td>
+                    <td><?= $row->bagian;?></td>
+                    <td><?= $row->kode_barang;?></td>
+                    <td><?= $row->nama_barang;?></td>
+                    <td><?= $row->satuan;?></td>
+                    <td><?= $row->jumlah;?></td>           
+                    <td style="text-align:center;">
+                      <?php if($row->status == "Disetujui"){
+                        echo "Disetujui";
+                      }else{ ?>
+                        <div class="row">
+                            <a type="button" class="btn btn-success" href="<?= base_url('admin/permintaan_barang/'.$row->id) ?>" name="btn_danger"><i class="fas fa-check-circle"></i></a>
+                            <a type="button" class="btn btn-danger" href="<?=base_url('admin/batal_sewa/'.$row->id) ?>" name="btn_danger"><i class="fas fa-times-circle" aria-hidden="true"></i></a>
+                        </div>
+                      <?php } ?>
+                    </td>                    
+                    <td style="text-align:center;">
+                      <?php if($row->status == "Disetujui"){?>
+                        <a type="button" class="btn btn-danger btn-report"  href="<?=base_url('report/barangKeluar/'.$row->id.'/'.$row->tanggal_keluar)?>" name="btn_report" style="margin:auto;"><i class="fas fa-file-alt" aria-hidden="true"></i></a>
+                      <?php } else{ ?>
+                        <?php echo "-";
+                      } ?>
+                    </td>
                 </tr>
-                    <?php $no++; ?>
-                    <?php endforeach;?>
-                    <?php }else { ?>
-                          <td colspan="10" align="center"><strong>Data Kosong</strong></td>
-                    <?php } ?>
+                  <?php }?>
               </tbody>
               <tfoot>
                 <tr>
@@ -60,6 +72,7 @@
                   <th>Nama Barang</th>
                   <th>Satuan</th>
                   <th>Jumlah</th>
+                  <th>Status Permintaan</th>
                   <th>Invoice</th>
                 </tr>
               </tfoot>

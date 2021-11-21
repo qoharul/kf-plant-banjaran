@@ -1,3 +1,5 @@
+<?php $session = session()?>
+
 <?php if ($list_data['jumlah']<1){
     throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Mobil Tidak ditemukan!');
 }
@@ -21,7 +23,7 @@
             </div>
             <?php endif; ?>
           <!-- form start -->
-          <form method="post" action="<?= base_url('admin/proses_peminjaman_mobil/' . $list_data['id_mobil']) ?>">
+          <form method="post" action="<?= base_url('pegawai/proses_peminjaman_mobil/' . $list_data['id_mobil']) ?>">
           <input type="hidden" class="form-control" id="id_mobil" name="id_mobil" value="<?= $list_data['id_mobil']; ?>" readonly>
           <?= csrf_field(); ?>
             <div class="card-body">
@@ -46,9 +48,6 @@
                     <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP">
                     <!-- <select id="nip" onkeyup="isi_otomatis()" name="nip" placeholder="Pilih NIP...">
                       <option value=""></option>
-                      <?php foreach($list_pegawai as $lp){?>
-                        <option value="<?=$lp['nip']?>"><?=$lp['nip']?></option>
-                      <?php } ?>
                     </select> -->
                   </div>
                 </div>
@@ -70,7 +69,7 @@
                   <div class="row">
                     <div class="form-group">
                       <label for="nama">Nama</label>
-                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama">
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" value="<?php echo $session->get('username'); ?>">
                     </div>
                   </div>
                   <!-- /.row 2.2.1 -->
@@ -259,7 +258,7 @@
                 <!-- /.col 1 -->
                 <!-- col 1 -->
                 <div class="col">
-                  <a type="button" class="btn btn-info" style="width:75%" href="<?=base_url('admin/tabel_mobilmasuk')?>" name="btn_listmobil"><i class="fa fa-table" aria-hidden="true"></i> Lihat List Mobil</a>
+                  <a type="button" class="btn btn-info" style="width:75%" href="<?=base_url('pegawai/tabel_mobilmasuk')?>" name="btn_listmobil"><i class="fa fa-table" aria-hidden="true"></i> Lihat List Mobil</a>
                 </div>
                 <!-- /.col 1 -->
                 <!-- col 1 -->

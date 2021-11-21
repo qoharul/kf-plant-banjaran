@@ -43,13 +43,13 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="nip">NIP</label>
-                    <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP">
-                    <!-- <select id="nip" onkeyup="isi_otomatis()" name="nip" placeholder="Pilih NIP...">
+                    <!-- <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP"> -->
+                    <select id="nip" onkeyup="isi_otomatis()" name="nip" placeholder="Pilih NIP...">
                       <option value=""></option>
                       <?php foreach($list_pegawai as $lp){?>
                         <option value="<?=$lp['nip']?>"><?=$lp['nip']?></option>
                       <?php } ?>
-                    </select> -->
+                    </select>
                   </div>
                 </div>
                 <!-- col -->

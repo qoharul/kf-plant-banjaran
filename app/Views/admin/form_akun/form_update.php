@@ -4,7 +4,7 @@
   <!-- general form elements -->
   <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title"><i class="fa fa-archive" aria-hidden="true"></i> Ubah Pengguna</h3>
+      <h3 class="card-title"><i class="fa fa-archive" aria-hidden="true"></i> Ubah Akun</h3>
     </div>
     <!-- card-body -->
     <div class="card-body">
@@ -19,7 +19,7 @@
       </div>
       <?php endif; ?>
       <!-- form start -->
-      <form action="<?=base_url('admin/proses_ubah_pengguna/'. $list_data['id']) ?>" role="form" method="post">
+      <form action="<?=base_url('admin/proses_ubah_akun/'. $list_data['id']) ?>" role="form" method="post">
 
         <?= csrf_field(); ?>
         <!-- row 1 -->
@@ -97,10 +97,10 @@
                 <select class="custom-select" name="role">
                   <?php if($list_data['role'] == 1){?>
                     <option value="1" selected="">Pengelola Gudang</option>
-                    <option value="2">Pegawai</option>
+                    <option value="0">Pegawai</option>
                     <?php }else{?>
                     <option value="1">Pengelola Gudang</option>
-                    <option value="2" selected="">Pegawai</option>
+                    <option value="0" selected="">Pegawai</option>
                       <?php } ?>
                 </select>
               </div>
@@ -123,7 +123,7 @@
             <!-- /.col 1 -->
             <!-- col 1 -->
             <div class="col">
-              <a type="button" class="btn btn-info" style="width:75%" href="<?=base_url('admin/pengguna')?>" name="btn_list"><i class="fa fa-table" aria-hidden="true"></i> Lihat List Pengguna</a>
+              <a type="button" class="btn btn-info" style="width:75%" href="<?=base_url('admin/akun')?>" name="btn_list"><i class="fa fa-table" aria-hidden="true"></i> Lihat List Akun</a>
             </div>
             <!-- /.col 1 -->
             <!-- col 1 -->

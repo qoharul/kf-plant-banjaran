@@ -54,12 +54,16 @@
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" method="post" action="<?php echo base_url('') ?>/auth/valid_login">
+					<?= csrf_field(); ?>
+
+
 					<span class="login100-form-logo">
-						<i class="zmdi zmdi-account"></i>
+						<!-- <i class="zmdi zmdi-account" ></i> -->
+						<img src="upload/icon.png" width="160" height="175" class="img-circle elevation-2" alt="User Image"></img>
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
+						ATK Mobil
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
@@ -77,12 +81,13 @@
 							Login
 						</button>
 					</div>
-
-					<div class="text-center p-t-90">
-						<a class="txt1" href="<?php echo base_url('') ?>/auth/register">
-							Belum punya akun?
+					<div class="text-center p-t-20">
+						<a class="txt1" href="<?php echo base_url('') ?>/auth/login">
+							&copy; KESBANGPOL JAWA BARAT
 						</a>
 					</div>
+
+
 				</form>
 			</div>
 		</div>

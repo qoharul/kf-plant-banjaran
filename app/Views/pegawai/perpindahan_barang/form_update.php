@@ -19,7 +19,7 @@
           </div>
         <?php endif; ?>
         <!-- form start -->
-        <form method="post" action="<?= base_url('admin/proses_perpindahan_barang/'.$list_data['id_transaksi']) ?>">                
+        <form method="post" action="<?= base_url('pegawai/proses_minta_barang/'.$list_data['id_transaksi']) ?>">                
           <input type="hidden" class="form-control" id="id_transaksi" name="id_transaksi" value="<?= $list_data['id_transaksi']; ?>" readonly>
           <?= csrf_field(); ?>
           <!-- row 1 -->
@@ -110,15 +110,7 @@
                 <!-- select -->
                 <div class="form-group">
                   <label for="satuan">Satuan</label>
-                  <select class="custom-select" name="satuan" readonly>
-                    <?php foreach($list_satuan as $s){?>
-                      <?php if($list_data['satuan'] == $s['nama_satuan']){?>
-                    <option value="<?=$list_data['satuan']?>" selected="" ><?=$list_data['satuan']?> </option>
-                    <?php }else{?>
-                    <option value="<?=$s['kode_satuan']?>"><?=$s['nama_satuan']?></option>
-                      <?php } ?>
-                      <?php } ?>
-                  </select>
+                  <input type="text" class="form-control" id="satuan" name="satuan" placeholder="Rim" value="<?= $list_data['satuan']; ?>" readonly>
                 </div>
               </div>
             </div>
@@ -151,7 +143,7 @@
               <!-- /.col 1 -->
               <!-- col 1 -->
               <div class="col">
-                <a type="button" class="btn btn-info" style="width:75%" href="<?=base_url('admin/tabel_barangmasuk')?>" name="btn_listbarang"><i class="fa fa-table" aria-hidden="true"></i> Lihat List Barang</a>
+                <a type="button" class="btn btn-info" style="width:75%" href="<?=base_url('pegawai/tabel_barangmasuk')?>" name="btn_listbarang"><i class="fa fa-table" aria-hidden="true"></i> Lihat List Barang</a>
               </div>
               <!-- /.col 1 -->
               <!-- col 1 -->

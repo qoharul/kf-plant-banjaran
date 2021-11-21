@@ -27,7 +27,7 @@ class Auth extends BaseController
     public function register()
     {
         //menampilkan halaman register
-        return view('auth/register');
+        // return view('auth/register');
     }
     
     public function valid_register()

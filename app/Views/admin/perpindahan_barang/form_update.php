@@ -106,20 +106,18 @@
             <!-- /.col 2 -->
             <!-- col 3 -->
             <div class="col">
+              <!-- select -->
               <div class="form-group">
-                <!-- select -->
-                <div class="form-group">
-                  <label for="satuan">Satuan</label>
-                  <select class="custom-select" name="satuan" readonly>
-                    <?php foreach($list_satuan as $s){?>
-                      <?php if($list_data['satuan'] == $s['nama_satuan']){?>
-                    <option value="<?=$list_data['satuan']?>" selected="" ><?=$list_data['satuan']?> </option>
-                    <?php }else{?>
-                    <option value="<?=$s['kode_satuan']?>"><?=$s['nama_satuan']?></option>
-                      <?php } ?>
-                      <?php } ?>
-                  </select>
-                </div>
+                <label for="satuan">Satuan</label>
+                <select class="custom-select" name="satuan" readonly>
+                  <?php foreach($list_satuan as $s){?>
+                    <?php if($list_data['satuan'] == $s['nama_satuan']){?>
+                  <option value="<?=$list_data['satuan']?>" selected="" ><?=$list_data['satuan']?> </option>
+                  <?php }else{?>
+                  <option value="<?=$s['kode_satuan']?>"><?=$s['nama_satuan']?></option>
+                    <?php } ?>
+                    <?php } ?>
+                </select>
               </div>
             </div>
             <!-- /.col 3 -->

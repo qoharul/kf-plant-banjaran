@@ -49,7 +49,7 @@
                           <a>-</a>
                         <?php }
                         else{ ?>
-                          <a type="button" class="btn btn-success btn-mobilkeluar"  href="<?=base_url('admin/mobil_keluar/'.$dd['id_mobil'])?>" name="btn_mobilkeluar" style="margin:auto;"><i class="fas fa-car-alt" aria-hidden="true"></i></a>
+                          <a type="button" class="btn btn-success btn-mobilkeluar"  href="<?=base_url('pegawai/pinjam_mobil/'.$dd['id_mobil'])?>" name="btn_mobilkeluar" style="margin:auto;"><i class="fas fa-car-alt" aria-hidden="true"></i></a>
                         <?php } ?> 
                       </td>
                     </tr>

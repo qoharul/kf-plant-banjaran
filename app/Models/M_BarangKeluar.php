@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\Database\BaseBuilder;
 
 class M_BarangKeluar extends Model
 {
+  protected $db;
   protected $table = 'tb_barang_keluar';
   protected $primaryKey = 'id'; 
   protected $allowedFields = [
@@ -16,7 +18,8 @@ class M_BarangKeluar extends Model
     'kode_barang',
     'nama_barang',
     'satuan',
-    'jumlah'
+    'jumlah',
+    'status'
   ];
 }
 
