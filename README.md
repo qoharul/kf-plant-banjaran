@@ -1,10 +1,19 @@
+### Information 
 ## Akun Pengelola
 username: pengelola
+
 password: pengelola
 
 ## Akun Pegawai
 username: pegawai
+
 password: pegawai
+
+## Screenshot
+![KF Plant](https://user-images.githubusercontent.com/75112719/219434276-4451b90a-44a9-4757-9408-3e8e04fe36af.PNG)
+![Dashboard Pengelola](https://user-images.githubusercontent.com/75112719/219434636-43fbad99-f629-4fce-bf72-10358e912bf9.PNG)
+![Dashboard Pegawai](https://user-images.githubusercontent.com/75112719/219434664-1fe33d0a-bef9-443a-bd52-37cd4c85d437.PNG)
+
 
 
 # CodeIgniter 4 Framework
