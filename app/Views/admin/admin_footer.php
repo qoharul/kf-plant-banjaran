@@ -3,7 +3,7 @@
     </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; KESBANGPOL JAWA BARAT</strong>
+    <strong>Copyright &copy; KIMIA FARMA BANJARAN</strong>
     <div class="float-right d-none d-sm-block">
       <b>Admin LTE 3.2.0-rc</b>
     </div>

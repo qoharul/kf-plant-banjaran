@@ -89,7 +89,14 @@ class Auth extends BaseController
                 $sessLogin = [
                     'isLogin' => true,
                     'username' => $user['username'],
-                    'role' => $user['role']
+                    'role' => $user['role'],
+                    'nip' => $user['nip'],
+                    'nama' => $user['nama'],
+                    'bagian' => $user['bagian'],
+                    'pangkat' => $user['pangkat'],
+                    'jabatan' => $user['jabatan'],
+                    'alamat' => $user['alamat'],
+                    'telp' => $user['telp']
                     ];
                 $this->session->set($sessLogin);
                 if($user['role'] == 1){

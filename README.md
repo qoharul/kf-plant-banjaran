@@ -1,3 +1,12 @@
+## Akun Pengelola
+username: pengelola
+password: pengelola
+
+## Akun Pegawai
+username: pegawai
+password: pegawai
+
+
 # CodeIgniter 4 Framework
 
 ## What is CodeIgniter?

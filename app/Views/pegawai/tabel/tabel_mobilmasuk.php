@@ -19,7 +19,7 @@
                       <th>Tipe</th>
                       <th>Nomor Polisi</th>
                       <th>Tahun</th>
-                      <th>Diperuntukkan</th>
+                      <th>Warna</th>
                       <th>Status</th>
                       <th>Pinjam Mobil</th>
                     </tr>
@@ -67,9 +67,72 @@
                       <th>Tipe</th>
                       <th>Nomor Polisi</th>
                       <th>Tahun</th>
-                      <th>Diperuntukkan</th>
+                      <th>Warna</th>
                       <th>Status</th>
                       <th>Pinjam Mobil</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fa fa-table" aria-hidden="true"></i> Mobil Yang Sedang Dipinjam</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>ID Transaksi</th>
+                      <th>ID Mobil</th>
+                      <th>Merk</th>
+                      <th>Tipe</th>
+                      <th>Nomor Polisi</th>
+                      <th>Tahun</th>
+                      <th>Dipinjam Oleh</th>
+                      <th>NIP</th>
+                      <th>Warna</th>
+                      <th>Dari Tanggal</th>
+                      <th>Sampai Tanggal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <?php foreach($list_data_dipinjam->getResult() as $key=>$row)
+                      {?>
+                        <td><?= ($key+1);?></td>
+                        <td><?= $row->id;?></td>
+                        <td><?= $row->id_mobil;?></td>
+                        <td><?= $row->merk_mobil;?></td>
+                        <td><?= $row->tipe_mobil;?></td>
+                        <td><?= $row->plat_mobil;?></td>
+                        <td><?= $row->tahun_mobil;?></td>
+                        <td><?= $row->nama_peminjam;?></td>
+                        <td><?= $row->nip_peminjam;?></td>
+                        <td><?= $row->tujuan_meminjam;?></td>
+                        <td><?= $row->tanggal_berangkat;?></td>
+                        <td><?= $row->tanggal_kembali;?></td>
+                    </tr>
+                  <?php }?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>No</th>
+                      <th>ID Transaksi</th>
+                      <th>ID Mobil</th>
+                      <th>Merk</th>
+                      <th>Tipe</th>
+                      <th>Nomor Polisi</th>
+                      <th>Tahun</th>
+                      <th>Dipinjam Oleh</th>
+                      <th>NIP</th>
+                      <th>Warna</th>
+                      <th>Dari Tanggal</th>
+                      <th>Sampai Tanggal</th>
                     </tr>
                   </tfoot>
                 </table>

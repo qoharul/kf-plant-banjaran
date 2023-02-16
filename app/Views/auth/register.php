@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>KESBANGPOL | Daftar</title>
+    <title>KIMIA FARMA | Daftar</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="<?php echo base_url('public/assets') ?>/upload/icon.png">

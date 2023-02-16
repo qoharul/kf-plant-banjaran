@@ -8,11 +8,11 @@ class tb_userSeeder extends Seeder
 {
     public function run()
     {
-        $faker      = \Faker\Factory::create('id_ID');
+        $faker      = \Faker\Factory::create('ja_JP');
         $salt       = uniqid('', true);
         $password   = md5('12345').$salt;
 
-        for($i = 0; $i < 25; $i++){
+        for($i = 0; $i < 15; $i++){
             $data = [
                 'username' => $faker->username,
                 'password' => $password,
@@ -36,6 +36,9 @@ class tb_userSeeder extends Seeder
 
         // Simple Queries
         // $this->db->query("INSERT INTO users (username, email) VALUES(:username:, :email:)", $data);
+
+        //Eksekusi = php spark db:seed tb_userSeeder
+        //Seeder otomatis = php spark make:seeder namaSeeder
 
     }
 }

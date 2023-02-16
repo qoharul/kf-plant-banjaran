@@ -32,7 +32,7 @@
           <div class="col">                
             <div class="form-group">
               <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username" value="<?= $list_data['username']; ?>">
+              <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username" value="<?= $list_data['username']; ?>" readonly>
             </div>
           </div>
           <!-- /.col 1.2 -->
@@ -113,6 +113,106 @@
           <!-- /.col 4.3 -->
         </div>
         <!-- /.row 4 -->
+          <!-- row 1 -->
+          <div class="row">
+            <!-- col 1.1 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.1 -->
+            <!-- col 1.2 -->
+            <div class="col">                
+              <div class="form-group">
+                <label for="nip">NIP</label>
+                <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP" value="<?= $list_data['nip']; ?>" readonly>
+              </div>
+            </div>
+            <!-- /.col 1.2 -->
+            <!-- col 1.3 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.3 -->
+          </div>
+          <!-- /.row 1 -->
+          <!-- row 1 -->
+          <div class="row">
+            <!-- col 1.1 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.1 -->
+            <!-- col 1.2 -->
+            <div class="col">                
+              <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" value="<?= $list_data['nama']; ?>">
+              </div>
+            </div>
+            <!-- /.col 1.2 -->
+            <!-- col 1.3 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.3 -->
+          </div>
+          <!-- /.row 1 -->
+          <!-- row 1 -->
+          <div class="row">
+            <!-- col 1.1 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.1 -->
+            <!-- col 1.2 -->
+            <div class="col">                
+              <div class="form-group">
+                <label for="jabatan">Jabatan</label>
+                <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan" value="<?= $list_data['jabatan']; ?>">
+              </div>
+            </div>
+            <!-- /.col 1.2 -->
+            <!-- col 1.3 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.3 -->
+          </div>
+          <!-- /.row 1 -->
+          <!-- row 1 -->
+          <div class="row">
+            <!-- col 1.1 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.1 -->
+            <!-- col 1.2 -->
+            <div class="col">                
+              <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" value="<?= $list_data['alamat']; ?>">
+              </div>
+            </div>
+            <!-- /.col 1.2 -->
+            <!-- col 1.3 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.3 -->
+          </div>
+          <!-- /.row 1 -->
+          <!-- row 1 -->
+          <div class="row">
+            <!-- col 1.1 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.1 -->
+            <!-- col 1.2 -->
+            <div class="col">                
+              <div class="form-group">
+                <label for="telp">Telepon</label>
+                <input type="text" class="form-control" id="telp" name="telp" placeholder="Masukkan Telepon" value="<?= $list_data['telp']; ?>">
+              </div>
+            </div>
+            <!-- /.col 1.2 -->
+            <!-- col 1.3 -->
+            <div class="col">
+            </div>
+            <!-- /.col 1.3 -->
+          </div>
+          <!-- /.row 1 -->
     </div>
         <div class="card-footer">
           <div align="center" class="row">

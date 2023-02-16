@@ -20,11 +20,10 @@
                       <th>Tipe</th>
                       <th>Nomor Polisi</th>
                       <th>Tahun</th>
-                      <th>Diperuntukkan</th>
+                      <th>Warna</th>
                       <th>Status</th>
                       <th>Ubah</th>
                       <th>Hapus</th>
-                      <th>Pinjamkan</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -48,19 +47,11 @@
                         <?php } ?>
                       <td align="center"><a type="button" class="btn btn-info"  href="<?=base_url('admin/ubah_mobil/'.$dd['id_mobil'])?>" name="btn_update" style="margin:auto;"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a></td>
                       <td align="center"><a type="button" class="btn btn-danger"  href="<?=base_url('admin/hapus_mobil/'.$dd['id_mobil'])?>" name="btn_delete" style="margin:auto;"><i class="fas fa-trash-alt" aria-hidden="true" onclick="return confirm('Apakah Anda yakin ingin menghapus data?')"></i></a></td>
-                      <td align="center">
-                        <?php if($dd['jumlah'] <= 0){ ?>
-                          <a>-</a>
-                        <?php }
-                        else{ ?>
-                          <a type="button" class="btn btn-success btn-mobilkeluar"  href="<?=base_url('admin/mobil_keluar/'.$dd['id_mobil'])?>" name="btn_mobilkeluar" style="margin:auto;"><i class="fas fa-car-alt" aria-hidden="true"></i></a>
-                        <?php } ?> 
-                      </td>
                     </tr>
                     <?php $no++; ?>
                     <?php endforeach;?>
                     <?php }else { ?>
-                    <td colspan="7" align="center"><strong>Data Kosong</strong></td>
+                    <td colspan="11" align="center"><strong>Data Kosong</strong></td>
                     <?php } ?>
                   </tbody>
                   <tfoot>
@@ -71,11 +62,10 @@
                       <th>Tipe</th>
                       <th>Nomor Polisi</th>
                       <th>Tahun</th>
-                      <th>Diperuntukkan</th>
+                      <th>Warna</th>
                       <th>Status</th>
                       <th>Ubah</th>
                       <th>Hapus</th>
-                      <th>Pinjamkan</th>
                     </tr>
                   </tfoot>
                 </table>

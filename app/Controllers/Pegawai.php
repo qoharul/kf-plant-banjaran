@@ -2,20 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\M_BarangMasuk;
-use App\Models\M_BarangKeluar;
 use App\Models\M_MobilMasuk;
 use App\Models\M_MobilKeluar;
+use App\Models\M_MobilKeluarQuery;
+use App\Models\M_AdminQuery;
 
 class Pegawai extends BaseController
 {
     public function __construct()
     {
         $this->session = session();
-        $this->barangMasuk = new M_BarangMasuk();
-        $this->barangKeluar = new M_BarangKeluar();
         $this->mobilMasuk = new M_MobilMasuk();
         $this->mobilKeluar = new M_MobilKeluar();
+        $this->mobilKeluarQuery = new M_MobilKeluarQuery();
+        $this->AdminQuery = new M_AdminQuery();
 
     }
     
@@ -33,124 +33,12 @@ class Pegawai extends BaseController
         
         $data['title'] = "Menu Utama";
         $data['activeMenu'] = "dashboard";
-
+        $data['stokMobilMasuk'] = $this->AdminQuery->sum_mobil_masuk();
+        $data['stokMobilKeluarByNip'] = $this->AdminQuery->sum_mobil_keluar_by_nip();
         echo view("pegawai/pegawai_header", $data);
         echo view('pegawai/index');
         echo view("pegawai/pegawai_footer", $data);
     }
-
-
-    ####################################
-            // DATA BARANG MASUK
-    ####################################
-      
-    public function tabel_barangmasuk()
-    {
-        $data['list_data'] = $this->barangMasuk->findAll();
-        $data['title'] = "Tabel Barang Masuk";
-        $data['activeMenu'] = "barang";
-
-        echo view("pegawai/pegawai_header", $data);
-        echo view('pegawai/tabel/tabel_barangmasuk', $data);
-        echo view("pegawai/pegawai_footer");
-    }  
-
-    public function minta_barang($id_transaksi)
-    {
-        $request = \Config\Services::request();
-        $uri = $request->uri->getSegment(3);
-        $where = array( 'id_transaksi' => $uri);
-
-        
-        $dataBarangMasuk = $this->barangMasuk->find($id_transaksi);
-        if (empty($dataBarangMasuk)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
-        }
-
-        $data['list_data'] = $dataBarangMasuk;
-        $data['title'] = "Minta Barang";
-        $data['activeMenu'] = "barang";
-
-        echo view("pegawai/pegawai_header", $data);
-        echo view('pegawai/perpindahan_barang/form_update',$data);
-        echo view("pegawai/pegawai_footer");
-    }
-
-    public function proses_minta_barang($id_transaksi)
-    {
-        if (!$this->validate([
-        'id_transaksi' => [
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'tanggal_masuk' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'tanggal_keluar' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'bagian' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'kode_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'nama_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'satuan' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'jumlah' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-
-        ])) {
-            session()->setFlashdata('error', $this->validator->listErrors());
-            return redirect()->back();
-        }
-
-        $this->barangKeluar->insert([
-            'id_transaksi' => $this->request->getVar('id_transaksi'),
-            'tanggal_masuk' => $this->request->getVar('tanggal_masuk'),
-            'tanggal_keluar' => $this->request->getVar('tanggal_keluar'),
-            'kode_barang' => $this->request->getVar('kode_barang'),
-            'bagian' => $this->request->getVar('bagian'),
-            'nama_barang' => $this->request->getVar('nama_barang'),
-            'satuan' => $this->request->getVar('satuan'),
-            'jumlah' => $this->request->getVar('jumlah'),
-            'status' => 'Belum Disetujui'
-            ]);
-        session()->setFlashdata('message', 'Mengeluarkan Data Barang Berhasil!');
-        return redirect()->to('pegawai/tabel_barangmasuk');
-    }
-
-    ####################################
-        // END DATA BARANG MASUK
-    ####################################
-
 
     ####################################
             // DATA MOBIL MASUK
@@ -159,6 +47,7 @@ class Pegawai extends BaseController
     public function tabel_mobilmasuk()
     {
         $data['list_data'] = $this->mobilMasuk->findAll();
+        $data['list_data_dipinjam'] = $this->mobilKeluarQuery->get_transaksi_mobil_by_dipinjam();
         $data['title'] = "Tabel Mobil Masuk";
         $data['activeMenu'] = "mobil";
 
@@ -208,12 +97,6 @@ class Pegawai extends BaseController
                 'required' => '{field} harus diisi'
             ]
         ],
-        'pangkat' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
         'jabatan' => [
             'rules' => 'required',
             'errors' => [
@@ -227,12 +110,6 @@ class Pegawai extends BaseController
             ]
         ],
         'telepon' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'bagian' => [
             'rules' => 'required',
             'errors' => [
                 'required' => '{field} harus diisi'
@@ -278,29 +155,95 @@ class Pegawai extends BaseController
             'id_mobil' => $this->request->getVar('id_mobil'),
             'tanggal_berangkat' => $this->request->getVar('tanggal_berangkat'),
             'tanggal_kembali' => $this->request->getVar('tanggal_kembali'),
-            'bagian' => $this->request->getVar('bagian'),
             'plat_mobil' => $this->request->getVar('plat_mobil'),
             'merk_mobil' => $this->request->getVar('merk_mobil'),
             'tahun_mobil' => $this->request->getVar('tahun_mobil'),
             'tanggal_dikembalikan' => "-",
             'tipe_mobil' => $this->request->getVar('tipe_mobil'),
+            'status_pengajuan' => "Belum Disetujui",
             'status_pinjaman' => "Belum Selesai",
+            'status_diterima' => "Belum Diterima",
             'jumlah' => "1",
             'nama_peminjam' => $this->request->getVar('nama'),
             'nip_peminjam' => $this->request->getVar('nip'),
-            'pangkat_peminjam' => $this->request->getVar('pangkat'),
             'jabatan_peminjam' => $this->request->getVar('jabatan'),
             'alamat_peminjam' => $this->request->getVar('alamat'),
             'telp_peminjam' => $this->request->getVar('telepon'),
             'tujuan_meminjam' => $this->request->getVar('tujuan')
             ]);
         session()->setFlashdata('message', 'Peminjaman Mobil Berhasil!');
-        return redirect()->to('pegawai/tabel_mobilkeluar');
+        return redirect()->to('pegawai/tabel_mobilmasuk');
     }
 
 
     ####################################
         // END DATA MOBIL MASUK
     ####################################
+
+    ####################################
+        // DATA RIWAYAT
+    ####################################
+
+    public function riwayat_mobil()
+    {
+        $data['list_mobil'] = $this->mobilKeluarQuery->get_transaksi_mobil_by_nip();
+        $data['title'] = "Riwayat Transaksi Mobil";
+        $data['activeMenu'] = "riwayatMobil";
+
+        echo view("pegawai/pegawai_header", $data);
+        echo view('pegawai/tabel/tabel_riwayat_mobil', $data);
+        echo view("pegawai/pegawai_footer");
+
+    }
+
+    public function terima_mobil($id)
+    {        
+        $where = array( 'id' => $id);        
+        
+        $dataMobilKeluar = $this->mobilKeluar->find($id);
+        if (empty($dataMobilKeluar)) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Mobil Tidak ditemukan!');
+        }
+
+        $data['list_data'] = $dataMobilKeluar;
+        $data['title'] = "Terima Mobil";
+        $data['activeMenu'] = "riwayatMobil";
+
+        echo view("pegawai/pegawai_header", $data);
+        echo view('pegawai/riwayat/terima_mobil',$data);
+        echo view("pegawai/pegawai_footer");
+    }
+
+    public function proses_terima_mobil($id)
+    {
+        if (!$this->validate([
+            'status_diterima' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi'
+                ]
+            ],
+            // 'jumlah' => [
+            //     'errors' => [
+            //         'required' => '{field} harus diisi'
+            //     ]
+            // ],
+            ])) {
+                session()->setFlashdata('error', $this->validator->listErrors());
+                return redirect()->back();
+            }
+
+            // $jumlah = $this->request->getVar('jumlah');
     
+            $this->mobilKeluar->update($id, [
+                'status_diterima' => $this->request->getVar('status_diterima')
+            ]);
+            session()->setFlashdata('message', 'Mobil Telah Diterima');
+            return redirect()->to('pegawai/riwayat_mobil');
+    }
+
+    
+    ####################################
+        // END DATA RIWAYAT
+    ####################################
 }

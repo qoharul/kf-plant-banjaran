@@ -32,21 +32,6 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-// $routes->get('/', 'Home::index');
-// $routes->get('/', 'Admin::index');
-// $routes->post('admin/mobil_keluar', 'Admin::mobil_keluar');
-// $routes->get('/auth/login', 'Auth::login');
-// $routes->post('/auth/login/valid_login', 'Auth::valid_login');
-// $routes->get('/auth/logout', 'Auth::logout');
-// $routes->get('/', 'Admin::index');
-// $routes->get('/admin/form_barangmasuk', 'Admin::form_barangmasuk');
-// $routes->post('/admin/proses_databarang_masuk_insert', 'Admin::proses_databarang_masuk_insert');
-//$routes->get('/admin/ubah_barang/(:num)', 'Admin::ubah_barang/$1');
-//$routes->post('/admin/proses_databarang_masuk_update/(:num)', 'Admin::proses_databarang_masuk_update/$1');
-//$routes->get('/admin/hapus_barang/(:num)', 'Admin::hapus_barang/$1');
-// $routes->get('/admin/ubah_mobil/(:num)', 'Admin::ubah_mobil/$1');
-// $routes->post('/admin/proses_datamobil_masuk_update/(:num)', 'Admin::proses_datamobil_masuk_update/$1');
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing

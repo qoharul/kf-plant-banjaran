@@ -3,9 +3,9 @@
     </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021</strong>
+    <strong>Copyright &copy; KIMIA FARMA BANJARAN</strong>
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0-rc
+      <b>Admin LTE 3.2.0-rc</b>
     </div>
   </footer>
 
@@ -74,6 +74,16 @@
       "scrollX": true,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  })
+
+  $(function () {
+    $("#example2").DataTable({
+      "responsive": false, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      "scrollX": true,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
   })
 
   //Date picker

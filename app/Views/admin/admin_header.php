@@ -6,7 +6,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/js/tom-select.complete.min.js"></script>  
   <link rel="icon" href="<?php echo base_url('public/assets') ?>/upload/icon.png">
-  <title>KESBANGPOL | <?php echo $title ?></title>
+  <title>KIMIA FARMA | <?php echo $title ?></title>
 
   <base href="<?php echo base_url('public/assets') ?>/">
   <!-- Google Font: Source Sans Pro -->
@@ -63,29 +63,17 @@
       <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <?php //foreach($notifikasi->getResult() as $key=>$row){?>
-            <span class="badge badge-danger navbar-badge"><?= $notifikasi->getResult(); ?></span>
+            <span class="badge badge-danger navbar-badge"><?= $jumlah_notif;?></span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">Notifications</span>
-            <?php //} ?>
+            <span class="dropdown-item dropdown-header"><?= $jumlah_notif;?> Notifications</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
+            <a href="<?php echo base_url('admin/pengajuan_mobil') ?>" class="dropdown-item">
+            <?php foreach($notifikasi_mobil->getResult() as $key=>$row){?>
+              <i class="fas fa-car mr-2"></i> <?= $row->id;?> pengajuan pinjam mobil
+              <!-- <span class="float-right text-muted text-sm">12 hours</span> -->
+            <?php } ?>
             </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
       </li>
       <!-- Full Screen -->
@@ -104,14 +92,14 @@
       <li class="dropdown user user-menu">
         <a href="#" class="nav-link" data-toggle="dropdown">
           <img src="dist/img/dummy-profile-pic.png" class="user-image" alt="User Image">
-          <span class="hidden-xs">Halo, <u><?php echo $session->get('username'); ?></u></span>
+          <span class="hidden-xs">Halo, <u><?php echo $session->get('nama'); ?></u></span>
         </a>
         <ul class="dropdown-menu">
           <!-- User image -->
           <li class="user-header">
             <img src="dist/img/dummy-profile-pic.png" class="img-circle" alt="User Image">
             <p>
-              Login sebagai : <?php echo $session->get('username');  ?>
+              Login sebagai : Admin
             </p>
           </li>              
           <!-- Menu Footer-->
@@ -131,7 +119,7 @@
     <!-- Brand Logo -->
     <a href="<?php echo base_url('') ?>/" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">ATKMobil | Pengelola</span>
+      <span class="brand-text font-weight-light">KF Plant | Pengelola</span>
     </a>
 
     <!-- Sidebar -->
@@ -142,7 +130,7 @@
           <img src="dist/img/dummy-profile-pic.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="<?php echo base_url('') ?>/" class="d-block"><?php echo $session->get('username')?></a>
+          <a href="<?php echo base_url('') ?>/" class="d-block"><?php echo $session->get('nama')?></a>
         </div>
       </div>
 
@@ -152,28 +140,26 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url("admin/tabel_barangmasuk")?>" class="nav-link <?php if(in_array($activeMenu,['barang'])) echo "active"?>">
-              <i class="nav-icon fas fa-box"></i>
-              <p>
-                Barang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?php echo site_url("admin/tabel_mobilmasuk")?>" class="nav-link <?php if(in_array($activeMenu,['mobil'])) echo "active"?>">
               <i class="nav-icon fas fa-car"></i>
               <p>
                 Mobil
               </p>
             </a>
+          </li>          
+          <li class="nav-item">
+          <a href="<?php echo site_url('admin/pengajuan_mobil') ?>" class="nav-link <?php if ($activeMenu == 'pengajuanMobil') echo "active"; ?>">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>Daftar Pengajuan</p>
+            <?php foreach($notifikasi_mobil->getResult() as $key=>$row){?>
+            <span class="badge badge-danger right"><?= $row->id;?></span>
+            <?php } ?>
+            </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo site_url("admin/tabel_permintaan")?>" class="nav-link <?php if(in_array($activeMenu,['permintaan'])) echo "active"?>">
-              <i class="nav-icon fas fa-tasks"></i>
-              <p>
-                Permintaan                
-                <span class="badge badge-danger right"><?= $row->id;?></span>
-              </p>
+            <a href="<?php echo site_url('admin/tabel_mobilkeluar') ?>" class="nav-link <?php if ($activeMenu == 'laporanMobil') echo "active"; ?>">
+              <i class="nav-icon fas fa-file"></i>
+              <p>Laporan</p>
             </a>
           </li>
           <li class="nav-item">
@@ -183,99 +169,6 @@
                 Pengguna
               </p>
             </a>
-          </li>
-          <!-- <li class="nav-item <?php if(in_array($activeMenu,['tambahBarang', 'tambahMobil', 'tambahSatuan'])) {
-            echo "menu-open";
-            } ?>">
-            <a href="#" class="nav-link <?php if(in_array($activeMenu,['tambahBarang', 'tambahMobil', 'tambahSatuan'])) {
-            echo "active";
-            } ?>">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Formulir
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo site_url('admin/form_barangmasuk') ?>" class="nav-link <?php if ($activeMenu == 'tambahBarang') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tambah Barang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo site_url('admin/form_mobilmasuk') ?>" class="nav-link <?php if ($activeMenu == 'tambahMobil') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tambah Mobil</p>
-                </a>
-              </li>
-            </ul>
-          </li>  -->
-          <!-- <li class="nav-item <?php if(in_array($activeMenu,['barangMasuk', 'barangKeluar', 'mobilMasuk', 'mobilKeluar', 'tabelSatuan'])) {
-            echo "menu-open";
-            } ?>">
-            <a href="#" class="nav-link <?php if(in_array($activeMenu,['barangMasuk', 'barangKeluar', 'mobilMasuk', 'mobilKeluar', 'tabelSatuan'])) {
-            echo "active";
-            } ?>">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Tabel
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-              <a href="<?php echo site_url('admin/tabel_barangmasuk') ?>" class="nav-link <?php if ($activeMenu == 'barangMasuk') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Barang Masuk</p>
-                </a>
-              </li>
-              <li class="nav-item">
-              <a href="<?php echo site_url('admin/tabel_barangkeluar') ?>" class="nav-link <?php if ($activeMenu == 'barangKeluar') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Barang Keluar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-              <a href="<?php echo site_url('admin/tabel_mobilmasuk') ?>" class="nav-link <?php if ($activeMenu == 'mobilMasuk') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mobil Masuk</p>
-                </a>
-              </li>
-              <li class="nav-item">
-              <a href="<?php echo site_url('admin/tabel_mobilkeluar') ?>" class="nav-link <?php if ($activeMenu == 'mobilKeluar') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mobil Keluar</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
-          <li class="nav-item <?php if(in_array($activeMenu,['laporanBarang', 'laporanMobil'])) {
-            echo "menu-open";
-            } ?>">
-            <a href="#" class="nav-link <?php if(in_array($activeMenu,['laporanBarang', 'laporanMobil'])) {
-            echo "active";
-            } ?>">
-              <i class="nav-icon fas fa-file"></i>
-              <p>
-                Laporan
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-              <a href="<?php echo site_url('admin/tabel_barangkeluar') ?>" class="nav-link <?php if ($activeMenu == 'laporanBarang') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Barang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-              <a href="<?php echo site_url('admin/tabel_mobilkeluar') ?>" class="nav-link <?php if ($activeMenu == 'laporanMobil') echo "active"; ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mobil</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
           <a href="<?php echo base_url('') ?>/auth/logout" class="nav-link">

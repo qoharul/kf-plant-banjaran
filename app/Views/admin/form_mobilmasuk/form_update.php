@@ -55,18 +55,12 @@
                     </div>
                     <!-- /.col 4 -->
                     <!-- col 5 -->
-                    <div class="col-1">
-                      <div class="form-group">
-                        <label for="jumlah">Jumlah</label>
-                        <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="0" value="<?= $list_data['jumlah']; ?>">
-                      </div>
-                    </div>
                     <!-- /.col 5 -->
                     <!-- col 6 -->
                     <div class="col-sm-3">
                       <div class="form-group">
-                        <label for="diperuntukkan">Diperuntukkan</label>
-                        <input type="text" class="form-control" id="diperuntukkan" name="diperuntukkan" placeholder="Kendaraan Operasional Pool" value="<?= $list_data['diperuntukkan']; ?>">
+                        <label for="diperuntukkan">Warna</label>
+                        <input type="text" class="form-control" id="diperuntukkan" name="diperuntukkan" placeholder="Hitam Met" value="<?= $list_data['diperuntukkan']; ?>">
                       </div>
                     </div>
                     <!-- /.col 6 -->

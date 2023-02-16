@@ -45,7 +45,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="nip">NIP</label>
-                    <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP">
+                    <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP" value="<?php echo $session->get('nip'); ?> " readonly>
                     <!-- <select id="nip" onkeyup="isi_otomatis()" name="nip" placeholder="Pilih NIP...">
                       <option value=""></option>
                     </select> -->
@@ -69,39 +69,17 @@
                   <div class="row">
                     <div class="form-group">
                       <label for="nama">Nama</label>
-                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" value="<?php echo $session->get('username'); ?>">
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" value="<?php echo $session->get('nama'); ?> " readonly>
                     </div>
                   </div>
                   <!-- /.row 2.2.1 -->
                   <!-- row 2.2.2 -->
-                  <div class="row">
-                    <!-- select -->
-                    <!-- <div class="form-group">
-                      <label for="bagian">Bagian</label>
-                      <select class="custom-select" name="bagian">
-                        <option value="">----- Pilih -----</option>
-                        <option value="TU Pimpinan">TU Pimpinan</option>
-                        <option value="Sekretariat (Kepegawaian)">Sekretariat (Kepegawaian)</option>
-                        <option value="Sekretariat (Perencanaan)">Sekretariat (Perencanaan)</option>
-                        <option value="Sekretariat (Keuangan)">Sekretariat (Keuangan)</option>
-                        <option value="Sekretariat (Arsip)">Sekretariat (Arsip)</option>
-                        <option value="Bidang (Kesbak)">Bidang (Kesbak)</option>
-                        <option value="Bidang (Poldagri)">Bidang (Poldagri)</option>
-                        <option value="Bidang (Wasda)">Bidang (Wasda)</option>
-                        <option value="Bidang (Idwasbang)">Bidang (Idwasbang)</option>
-                      </select>
-                    </div> -->
-                    <div class="form-group">
-                      <label for="bagian">Bagian</label>
-                      <input type="text" class="form-control" id="bagian" name="bagian" placeholder="Masukkan Bagian">
-                    </div>
-                  </div>
                   <!-- /.row 2.2.2 -->
                   <!-- row 2.2.3 -->
                   <div class="row">
                     <div class="form-group">
-                      <label for="pangkat">Pangkat/Golongan</label>
-                      <input type="text" class="form-control" id="pangkat" name="pangkat" placeholder="Masukkan Pangkat/Golongan">
+                      <label for="alamat">Alamat</label>
+                      <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" value="<?php echo $session->get('alamat'); ?> " readonly>
                     </div>
                   </div>
                   <!-- /.row 2.2.3 -->
@@ -113,23 +91,17 @@
                   <div class="row">
                     <div class="form-group">
                       <label for="jabatan">Jabatan</label>
-                      <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan">
+                      <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan" value="<?php echo $session->get('jabatan'); ?> " readonly>
                     </div>
                   </div>
                   <!-- /.row 3.1 -->
                   <!-- row 3.2 -->
-                  <div class="row">
-                    <div class="form-group">
-                      <label for="alamat">Alamat</label>
-                      <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
-                    </div>
-                  </div>
                   <!-- /.row 3.2 -->
                   <!-- row 3.3 -->
                   <div class="row">
                     <div class="form-group">
                       <label for="telepon">Nomor Telepon</label>
-                      <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon">
+                      <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon" value="<?php echo $session->get('telp'); ?> " readonly>
                     </div>
                   </div>
                   <!-- /.row 3.3 -->

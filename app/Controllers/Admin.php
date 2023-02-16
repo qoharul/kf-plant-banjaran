@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\M_BarangMasuk;
-use App\Models\M_BarangKeluar;
-use App\Models\M_BarangKeluarQuery;
+use App\Models\M_AdminQuery;
 use App\Models\M_MobilMasuk;
 use App\Models\M_MobilKeluar;
+use App\Models\M_MobilKeluarQuery;
 use App\Models\M_Satuan;
 use App\Models\UserModel;
 use App\Models\M_ListPegawai;
@@ -17,11 +16,10 @@ class Admin extends BaseController
     public function __construct()
     {
         $this->session = session();       
-        $this->barangMasuk = new M_BarangMasuk();
-        $this->barangKeluar = new M_BarangKeluar();
-        $this->barangKeluarQuery = new M_BarangKeluarQuery();
+        $this->AdminQuery = new M_AdminQuery();
         $this->mobilMasuk = new M_MobilMasuk();
         $this->mobilKeluar = new M_MobilKeluar();
+        $this->mobilKeluarQuery = new M_MobilKeluarQuery();
         $this->satuan = new M_Satuan();
         $this->pengguna = new UserModel();
         $this->pegawai = new M_ListPegawai();        
@@ -39,326 +37,25 @@ class Admin extends BaseController
             return redirect()->to('/pegawai');
         }
         
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
         
-        // $data['mobilDisewa'] = $this->mobilKeluar->selectSum('tb_mobil_keluar','jumlah');
-        $data['notifikasi'] = $this->barangKeluarQuery->notifikasi()->getResult();
-        $data['title'] = "Dashboard";
-        $data['activeMenu'] = "dashboard";
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
+        $data['title'] = "Menu Utama";
+        $data['activeMenu'] = "dashboard";      
+        $data['stokMobilMasuk'] = $this->AdminQuery->sum_mobil_masuk();
+        $data['stokMobilKeluar'] = $this->AdminQuery->sum_mobil_keluar();
+
 
         echo view("admin/admin_header", $data);
         echo view('admin/index', $data);
         echo view("admin/admin_footer");
     }
-
-
-    ####################################
-            // DATA BARANG MASUK
-    ####################################
-  
-    public function form_barangmasuk()
-    {
-        $data['list_satuan'] = $this->satuan->findAll();
-        $data['title'] = "Tambah Barang";
-        $data['activeMenu'] = "barang";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/form_barangmasuk/form_insert', $data);
-        echo view("admin/admin_footer");
-    }
-    
-    public function proses_databarang_masuk_insert()
-    {
-        if (!$this->validate([
-        'date' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'kode_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'nama_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'satuan' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'jumlah' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-
-        ])) {
-        session()->setFlashdata('error', $this->validator->listErrors());
-        return redirect()->back()->withInput();
-        }
-
-        $this->barangMasuk->insert([
-        'tanggal' => $this->request->getVar('date'),
-        'kode_barang' => $this->request->getVar('kode_barang'),
-        'nama_barang' => $this->request->getVar('nama_barang'),
-        'satuan' => $this->request->getVar('satuan'),
-        'jumlah' => $this->request->getVar('jumlah')
-        ]);
-        session()->setFlashdata('message', 'Tambah Data Barang Berhasil');
-        return redirect()->to('/admin/tabel_barangmasuk');
-    }
-
-    function ubah_barang($id_transaksi)
-    {
-        $dataBarangMasuk = $this->barangMasuk->find($id_transaksi);
-        if (empty($dataBarangMasuk)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
-        }
-        $data['list_data'] = $dataBarangMasuk;
-        $data['list_satuan'] = $this->satuan->findAll();
-        $data['title'] = "Ubah Barang";
-        $data['activeMenu'] = "barang";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/form_barangmasuk/form_update', $data);
-        echo view("admin/admin_footer");
-    }
-
-    public function proses_databarang_masuk_update($id_transaksi)
-    {
-        if (!$this->validate([
-        'date' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'kode_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'nama_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'satuan' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'jumlah' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-
-        ])) {
-            session()->setFlashdata('error', $this->validator->listErrors());
-            return redirect()->back();
-        }
-
-        $this->barangMasuk->update($id_transaksi, [
-            'tanggal' => $this->request->getVar('date'),
-            'kode_barang' => $this->request->getVar('kode_barang'),
-            'nama_barang' => $this->request->getVar('nama_barang'),
-            'satuan' => $this->request->getVar('satuan'),
-            'jumlah' => $this->request->getVar('jumlah')
-            ]);
-        session()->setFlashdata('message', 'Ubah Data Barang Berhasil');
-        return redirect()->to('admin/tabel_barangmasuk');
-    }
-
-    function hapus_barang($id_transaksi)
-    {
-        $dataBarangMasuk = $this->barangMasuk->find($id_transaksi);
-        if (empty($dataBarangMasuk)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
-        }
-        $this->barangMasuk->delete($id_transaksi);
-        session()->setFlashdata('message', 'Hapus Data Barang Berhasil');
-        return redirect()->to('admin/tabel_barangmasuk');
-    }
-    
-    public function tabel_barangmasuk()
-    {
-        $data['notifikasi'] = $this->barangKeluarQuery->notifikasi();
-        $data['list_data'] = $this->barangMasuk->findAll();
-        $data['title'] = "Barang";
-        $data['activeMenu'] = "barang";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/tabel/tabel_barangmasuk', $data);
-        echo view("admin/admin_footer");
-    }  
-
-    public function tabel_barangkeluar()
-    {
-        $data['list_data'] = $this->barangKeluar->get();
-        $data['title'] = "Tabel Barang Keluar";
-        $data['activeMenu'] = "laporanBarang";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/tabel/tabel_barangkeluar', $data);
-        echo view("admin/admin_footer");
-    }
-
-    public function barang_keluar($id_transaksi)
-    {
-        $request = \Config\Services::request();
-        $uri = $request->uri->getSegment(3);
-        $where = array( 'id_transaksi' => $uri);
-
-        
-        $dataBarangMasuk = $this->barangMasuk->find($id_transaksi);
-        if (empty($dataBarangMasuk)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
-        }
-
-        $data['list_data'] = $dataBarangMasuk;
-        $data['list_satuan'] = $this->satuan->findAll();
-        $data['title'] = "Keluarkan Barang";
-        $data['activeMenu'] = "barang";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/perpindahan_barang/form_update',$data);
-        echo view("admin/admin_footer");
-    }
-  
-    public function proses_perpindahan_barang($id_transaksi)
-    {
-        if (!$this->validate([
-        'id_transaksi' => [
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'tanggal_masuk' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'tanggal_keluar' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'bagian' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'kode_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'nama_barang' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'satuan' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'jumlah' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-
-        ])) {
-            session()->setFlashdata('error', $this->validator->listErrors());
-            return redirect()->back();
-        }
-
-        $this->barangKeluar->insert([
-            'id_transaksi' => $this->request->getVar('id_transaksi'),
-            'tanggal_masuk' => $this->request->getVar('tanggal_masuk'),
-            'tanggal_keluar' => $this->request->getVar('tanggal_keluar'),
-            'kode_barang' => $this->request->getVar('kode_barang'),
-            'bagian' => $this->request->getVar('bagian'),
-            'nama_barang' => $this->request->getVar('nama_barang'),
-            'satuan' => $this->request->getVar('satuan'),
-            'jumlah' => $this->request->getVar('jumlah')
-            ]);
-        session()->setFlashdata('message', 'Mengeluarkan Data Barang Berhasil!');
-        return redirect()->to('admin/tabel_barangkeluar');
-    }
-    
-    public function permintaan_barang($id)
-    {        
-        $where = array( 'id' => $id);        
-        
-        $dataBarangKeluar = $this->barangKeluar->find($id);
-        if (empty($dataBarangKeluar)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Barang Tidak ditemukan!');
-        }
-
-        $data['list_data'] = $dataBarangKeluar;
-        $data['title'] = "Permintaan Barang";
-        $data['activeMenu'] = "barangKeluar";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/permintaan_barang/form_update',$data);
-        echo view("admin/admin_footer");
-    }
-
-    public function proses_permintaan_barang($id)
-    {
-        if (!$this->validate([
-            'status' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus diisi'
-                ]
-            ],
-            // 'jumlah' => [
-            //     'errors' => [
-            //         'required' => '{field} harus diisi'
-            //     ]
-            // ],
-            ])) {
-                session()->setFlashdata('error', $this->validator->listErrors());
-                return redirect()->back();
-            }
-
-            // $jumlah = $this->request->getVar('jumlah');
-    
-            $this->barangKeluar->update($id, [
-                'status' => $this->request->getVar('status')
-            ]);
-            session()->setFlashdata('message', 'Permintaan Barang Telah Disetujui');
-            return redirect()->to('admin/tabel_barangkeluar');
-    }
-  
-
-    ####################################
-        // END DATA BARANG MASUK
-    ####################################
-
 
     ####################################
             // DATA MOBIL MASUK
@@ -366,6 +63,17 @@ class Admin extends BaseController
   
     public function form_mobilmasuk()
     {
+        
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
+
         $data['title'] = "Tambah Mobil";
         $data['activeMenu'] = "mobil";
 
@@ -390,7 +98,7 @@ class Admin extends BaseController
             ]
         ],
         'plat_mobil' => [
-            'rules' => 'required',
+            'rules' => 'required|is_unique[tb_mobil_masuk.plat_mobil,id_mobil,{id_mobil}]',
             'errors' => [
                 'required' => '{field} harus diisi'
             ]
@@ -401,18 +109,18 @@ class Admin extends BaseController
                 'required' => '{field} harus diisi'
             ]
         ],
-        'jumlah' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'diperuntukkan' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
+        // 'jumlah' => [
+        //     'rules' => 'required',
+        //     'errors' => [
+        //         'required' => '{field} harus diisi'
+        //     ]
+        // ],
+        // 'diperuntukkan' => [
+        //     'rules' => 'required',
+        //     'errors' => [
+        //         'required' => '{field} harus diisi'
+        //     ]
+        // ],
 
         ])) {
         session()->setFlashdata('error', $this->validator->listErrors());
@@ -424,7 +132,7 @@ class Admin extends BaseController
             'tipe_mobil' => $this->request->getVar('tipe_mobil'),
             'plat_mobil' => $this->request->getVar('plat_mobil'),
             'tahun_mobil' => $this->request->getVar('tahun_mobil'),
-            'jumlah' => $this->request->getVar('jumlah'),
+            'jumlah' => "1",
             'diperuntukkan' => $this->request->getVar('diperuntukkan')
         ]);
         session()->setFlashdata('message', 'Tambah Data Mobil Berhasil');
@@ -433,6 +141,15 @@ class Admin extends BaseController
 
     function ubah_mobil($id_mobil)
     {
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
         $dataMobilMasuk = $this->mobilMasuk->find($id_mobil);
         if (empty($dataMobilMasuk)) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Mobil Tidak ditemukan!');
@@ -473,12 +190,6 @@ class Admin extends BaseController
                 'required' => '{field} harus diisi'
             ]
         ],
-        'jumlah' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
         'diperuntukkan' => [
             'rules' => 'required',
             'errors' => [
@@ -496,7 +207,6 @@ class Admin extends BaseController
             'tipe_mobil' => $this->request->getVar('tipe_mobil'),
             'plat_mobil' => $this->request->getVar('plat_mobil'),
             'tahun_mobil' => $this->request->getVar('tahun_mobil'),
-            'jumlah' => $this->request->getVar('jumlah'),
             'diperuntukkan' => $this->request->getVar('diperuntukkan')
         ]);
         session()->setFlashdata('message', 'Ubah Data Mobil Berhasil');
@@ -516,9 +226,20 @@ class Admin extends BaseController
 
     public function tabel_mobilmasuk()
     {
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
+
         $data['list_data'] = $this->mobilMasuk->findAll();
         $data['title'] = "Tabel Mobil Masuk";
         $data['activeMenu'] = "mobil";
+        // $data['notifikasi'] = $this->AdminQuery->notifikasi();
 
         echo view("admin/admin_header", $data);
         echo view('admin/tabel/tabel_mobilmasuk', $data);
@@ -527,9 +248,19 @@ class Admin extends BaseController
 
     public function tabel_mobilkeluar()
     {
-        $data['list_data'] = $this->mobilKeluar->findAll();
-        $data['title'] = "Tabel Mobil Dipinjam";
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
+        $data['list_data'] = $this->AdminQuery->get_where_mobil_belum_disetujui();
+        $data['title'] = "Riwayat Mobil Dipinjam";
         $data['activeMenu'] = "laporanMobil";
+        // $data['notifikasi'] = $this->AdminQuery->notifikasi();
 
         echo view("admin/admin_header", $data);
         echo view('admin/tabel/tabel_mobilkeluar', $data);
@@ -538,6 +269,16 @@ class Admin extends BaseController
 
     public function mobil_keluar($id_mobil)
     {
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
+
         $request = \Config\Services::request();
         $uri = $request->uri->getSegment(3);
         $where = array( 'id_mobil' => $uri);
@@ -654,6 +395,7 @@ class Admin extends BaseController
             'tahun_mobil' => $this->request->getVar('tahun_mobil'),
             'tanggal_dikembalikan' => "-",
             'tipe_mobil' => $this->request->getVar('tipe_mobil'),
+            'status_pengajuan' => "Disetujui",
             'status_pinjaman' => "Belum Selesai",
             'jumlah' => "1",
             'nama_peminjam' => $this->request->getVar('nama'),
@@ -670,6 +412,16 @@ class Admin extends BaseController
 
     public function pengembalian_mobil($id)
     {        
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
+
         $where = array( 'id' => $id);        
         
         $dataMobilKeluar = $this->mobilKeluar->find($id);
@@ -724,7 +476,7 @@ class Admin extends BaseController
         }
         $this->mobilKeluar->delete($id);
         session()->setFlashdata('message', 'Batal Sewa Mobil Berhasil');
-        return redirect()->to('admin/tabel_mobilkeluar');
+        return redirect()->to('admin/pengajuan_mobil');
 
 
     }
@@ -735,174 +487,84 @@ class Admin extends BaseController
 
 
     ####################################
-            // DATA PERMINTAAN
+            // DATA PENGAJUAN
     ####################################
-
-    public function tabel_permintaan()
-    {
-        // $data['list_barang'] = $this->barangKeluar->get_where();
-
-        $data['list_barang'] = $this->barangKeluarQuery->get_where();
-        // $data['list_mobil'] = $this->mobilKeluar->findAll();
-        $data['notifikasi'] = $this->barangKeluarQuery->notifikasi();
-        $data['title'] = "Konfirmasi Pengajuan";
-        $data['activeMenu'] = "permintaan";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/tabel/tabel_permintaan', $data);
-        echo view("admin/admin_footer");
-
-		// $list_barang = $this->barangKeluar->get_where();
-		// foreach($list_barang->getResult() as $key=>$row)
-		// {
-		// 	echo ($key+1).'. '; 
-		// 	echo $row->kode_barang;
-		// 	echo ' - ';
-		// 	echo $row->nama_barang;
-		// 	echo '<br>';
-		// }
-
-    }  
-
-
-    ####################################
-        // END DATA PERMINTAAN
-    ####################################
-
-
-    ####################################
-            // DATA SATUAN
-    ####################################
-
-    public function form_satuan()
-    {
-        $data['title'] = "Tambah Satuan";
-        $data['activeMenu'] = "tambahSatuan";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/form_satuan/form_insert', $data);
-        echo view("admin/admin_footer");
-    }
     
-    public function proses_satuan_insert()
-    {
-        if (!$this->validate([
-        'kode_satuan' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
-        'nama_satuan' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => '{field} harus diisi'
-            ]
-        ],
+    public function permintaan_mobil($id)
+    {        
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
 
-        ])) {
-        session()->setFlashdata('error', $this->validator->listErrors());
-        return redirect()->back()->withInput();
+
+        $where = array( 'id' => $id);        
+        
+        $dataMobilKeluar = $this->mobilKeluar->find($id);
+        if (empty($dataMobilKeluar)) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Mobil Tidak ditemukan!');
         }
 
-        $this->satuan->insert([
-            'kode_satuan' => $this->request->getVar('kode_satuan'),
-            'nama_satuan' => $this->request->getVar('nama_satuan')
-        ]);
-        session()->setFlashdata('message', 'Tambah Data Satuan Berhasil');
-        return redirect()->to('/admin/form_satuan');
-    }
-
-    function ubah_satuan($id_satuan)
-    {
-        $dataSatuan = $this->satuan->find($id_satuan);
-        if (empty($dataSatuan)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Satuan Tidak ditemukan!');
-        }
-
-        $data['list_satuan'] = $dataSatuan;
-        $data['title'] = "Ubah Satuan";
-        $data['activeMenu'] = "tambahSatuan";
+        $data['list_data'] = $dataMobilKeluar;
+        $data['title'] = "Permintaan Mobil";
+        $data['activeMenu'] = "mobilKeluar";
 
         echo view("admin/admin_header", $data);
-        echo view('admin/form_satuan/form_update', $data);
+        echo view('admin/permintaan_mobil/form_update',$data);
         echo view("admin/admin_footer");
     }
 
-    public function proses_satuan_update($id_satuan)
+    public function proses_permintaan_mobil($id)
     {
         if (!$this->validate([
-            'kode_satuan' => [
+            'sopir' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi'
                 ]
             ],
-            'nama_satuan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus diisi'
-                ]
-        ],
+            ])) {
+                session()->setFlashdata('error', $this->validator->listErrors());
+                return redirect()->back();
+            }
 
-        ])) {
-            session()->setFlashdata('error', $this->validator->listErrors());
-            return redirect()->back();
-        }
-
-        $this->satuan->update($id_satuan, [
-            'kode_satuan' => $this->request->getVar('kode_satuan'),
-            'nama_satuan' => $this->request->getVar('nama_satuan')
-        ]);
-        session()->setFlashdata('message', 'Ubah Data Satuan Berhasil');
-        return redirect()->to('admin/tabel_satuanbarang');
+            // $jumlah = $this->request->getVar('jumlah');
+    
+            $this->mobilKeluar->update($id, [
+                'status_pengajuan' => "Disetujui",
+                'sopir' => $this->request->getVar('sopir')
+            ]);
+            session()->setFlashdata('message', 'Permintaan Mobil Telah Disetujui');
+            return redirect()->to('admin/pengajuan_mobil');
     }
-
-    function hapus_satuan($id_satuan)
+    
+    public function pengajuan_mobil()
     {
-        $dataSatuan = $this->satuan->find($id_satuan);
-        if (empty($dataSatuan)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Satuan Tidak ditemukan!');
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
         }
-        $this->satuan->delete($id_satuan);
-        session()->setFlashdata('message', 'Hapus Data Satuan Berhasil');
-        return redirect()->to('admin/tabel_satuanbarang');
-    }
-
-    public function tabel_satuanbarang()
-    {
-        $data['list_data'] = $this->satuan->findAll();
-        $data['title'] = "Tabel Satuan Barang";
-        $data['activeMenu'] = "tabelSatuan";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/tabel/tabel_satuan', $data);
-        echo view("admin/admin_footer");
-    }
-
-    ####################################
-        // END DATA SATUAN
-    ####################################
-
-    ####################################
-        // PROFILE
-    ####################################
-
-    public function profil()
-    {        
-        $data['title'] = "Profil";
-        $data['activeMenu'] = "profil";
-
-        echo view("admin/admin_header", $data);
-        echo view('admin/profil', $data);
-        echo view("admin/admin_footer");
-
+        $data['jumlah_notif'] = $b;
         
-    }
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+        $data['list_mobil'] = $this->mobilKeluarQuery->get_where();
+        $data['title'] = "Konfirmasi Pengajuan";
+        $data['activeMenu'] = "pengajuanMobil";
+
+        echo view("admin/admin_header", $data);
+        echo view('admin/tabel/tabel_pengajuan_mobil', $data);
+        echo view("admin/admin_footer");
+    }  
 
     ####################################
-        // END PROFIL
+        // END DATA PENGAJUAN
     ####################################
+
 
     ####################################
         // PENGGUNA
@@ -910,9 +572,19 @@ class Admin extends BaseController
 
     public function pengguna()
     {        
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
         $data['list_pengguna'] = $this->pengguna->findAll();
         $data['title'] = "Pengguna";
         $data['activeMenu'] = "pengguna";
+        // $data['notifikasi'] = $this->AdminQuery->notifikasi();
 
         echo view("admin/admin_header", $data);
         echo view('admin/pengguna', $data);
@@ -923,6 +595,15 @@ class Admin extends BaseController
     
     public function tambah_pengguna()
     {
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
         $data['title'] = "Tambah Pengguna";
         $data['activeMenu'] = "pengguna";
 
@@ -964,6 +645,36 @@ class Admin extends BaseController
                 'required' => '{field} harus diisi'
             ]
         ],
+        'nip' => [
+            'rules' => 'required|is_unique[user.nip,id,{id}]',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
+        'nama' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
+        'jabatan' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
+        'alamat' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
+        'telp' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
 
         ])) {
         session()->setFlashdata('error', $this->validator->listErrors());
@@ -982,7 +693,12 @@ class Admin extends BaseController
         'username' => $this->request->getVar('username'),
         'password' => $password,
         'salt' => $salt,
-        'role' => $this->request->getVar('role')
+        'role' => $this->request->getVar('role'),
+        'nip' => $this->request->getVar('nip'),
+        'nama' => $this->request->getVar('nama'),
+        'jabatan' => $this->request->getVar('jabatan'),
+        'alamat' => $this->request->getVar('alamat'),
+        'telp' => $this->request->getVar('telp')
         ]);
         session()->setFlashdata('message', 'Tambah Pengguna Berhasil');
         return redirect()->to('/admin/pengguna');
@@ -990,6 +706,16 @@ class Admin extends BaseController
 
     function ubah_pengguna($id)
     {
+        $jumlah_notif_mobil = $this->AdminQuery->notifikasi_mobil()->getResult();
+        foreach($jumlah_notif_mobil as $key=>$row)
+        {
+            $b = $row->id;
+        }
+        $data['jumlah_notif'] = $b;
+        
+        $data['notifikasi_mobil'] = $this->AdminQuery->notifikasi_mobil();  
+
+
         $dataPengguna = $this->pengguna->find($id);
         if (empty($dataPengguna)) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Pengguna Tidak ditemukan!');
@@ -1006,14 +732,6 @@ class Admin extends BaseController
     public function proses_ubah_pengguna($id)
     {
         if (!$this->validate([
-        'username' => [
-            'rules' => 'required|min_length[4]|max_length[30]',
-            'errors' => [
-                'required' => '{field} harus diisi',
-                'min_length' => 'Nilai yang diberikan ({value}) untuk {field} harus memiliki minimal {param} karakter!',
-                'max_length' => '{field} tidak boleh melebihi {param} karakter.'
-            ]
-        ],
         // 'password' => [
         //     'rules' => 'required|min_length[4]|max_length[30]',
         //     'errors' => [
@@ -1035,6 +753,30 @@ class Admin extends BaseController
                 'required' => '{field} harus diisi'
             ]
         ],
+        'nama' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
+        'jabatan' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
+        'alamat' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
+        'telp' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} harus diisi'
+            ]
+        ],
 
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
@@ -1042,9 +784,14 @@ class Admin extends BaseController
         }
 
         $this->pengguna->update($id, [
-            'username' => $this->request->getVar('username'),
             // 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-            'role' => $this->request->getVar('role')
+            'role' => $this->request->getVar('role'),
+            'nama' => $this->request->getVar('nama'),
+            'bagian' => $this->request->getVar('bagian'),
+            'pangkat' => $this->request->getVar('pangkat'),
+            'jabatan' => $this->request->getVar('jabatan'),
+            'alamat' => $this->request->getVar('alamat'),
+            'telp' => $this->request->getVar('telp')
             ]);
         session()->setFlashdata('message', 'Ubah Pengguna Berhasil');
         return redirect()->to('admin/pengguna');

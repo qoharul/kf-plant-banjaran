@@ -1,3 +1,4 @@
+<?php $session = session()?>
 <?php if ($list_data['jumlah']<1){
     throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Mobil Tidak ditemukan!');
 }
@@ -43,7 +44,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="nip">NIP</label>
-                    <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP">
+                    <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP" value="<?php echo $session->get('nip'); ?> ">
                     <!-- <select id="nip" onkeyup="isi_otomatis()" name="nip" placeholder="Pilih NIP...">
                       <option value=""></option>
                       <?php foreach($list_pegawai as $lp){?>
@@ -70,7 +71,7 @@
                   <div class="row">
                     <div class="form-group">
                       <label for="nama">Nama</label>
-                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama">
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" value="<?php echo $session->get('nama'); ?> " >
                     </div>
                   </div>
                   <!-- /.row 2.2.1 -->
@@ -94,15 +95,15 @@
                     </div> -->
                     <div class="form-group">
                       <label for="bagian">Bagian</label>
-                      <input type="text" class="form-control" id="bagian" name="bagian" placeholder="Masukkan Bagian">
+                      <input type="text" class="form-control" id="bagian" name="bagian" placeholder="Masukkan Bagian" value="<?php echo $session->get('bagian'); ?> " >
                     </div>
                   </div>
                   <!-- /.row 2.2.2 -->
                   <!-- row 2.2.3 -->
                   <div class="row">
                     <div class="form-group">
-                      <label for="pangkat">Pangkat/Golongan</label>
-                      <input type="text" class="form-control" id="pangkat" name="pangkat" placeholder="Masukkan Pangkat/Golongan">
+                      <label for="alamat">Alamat</label>
+                      <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" value="<?php echo $session->get('alamat'); ?> " >
                     </div>
                   </div>
                   <!-- /.row 2.2.3 -->
@@ -114,15 +115,15 @@
                   <div class="row">
                     <div class="form-group">
                       <label for="jabatan">Jabatan</label>
-                      <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan">
+                      <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan" value="<?php echo $session->get('jabatan'); ?> " >
                     </div>
                   </div>
                   <!-- /.row 3.1 -->
                   <!-- row 3.2 -->
                   <div class="row">
                     <div class="form-group">
-                      <label for="alamat">Alamat</label>
-                      <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
+                      <label for="pangkat">Pangkat/Golongan</label>
+                      <input type="text" class="form-control" id="pangkat" name="pangkat" placeholder="Masukkan Pangkat/Golongan" value="<?php echo $session->get('pangkat'); ?> " >
                     </div>
                   </div>
                   <!-- /.row 3.2 -->
@@ -130,7 +131,7 @@
                   <div class="row">
                     <div class="form-group">
                       <label for="telepon">Nomor Telepon</label>
-                      <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon">
+                      <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon" value="<?php echo $session->get('telp'); ?> " >
                     </div>
                   </div>
                   <!-- /.row 3.3 -->
